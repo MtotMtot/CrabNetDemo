@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Movement Variables
     [Header("Base setup")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    // Character controller reference
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -19,9 +21,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    // Camera reference + offset variable.
     [SerializeField]
     private float cameraYOffset = 0.4f;
     private Camera playerCamera;
+
+    // Shoot script reference
+    [SerializeField]
+    private RayCastShoot rayCastShoot;
 
     void Start()
     {
@@ -78,6 +85,12 @@ public class PlayerController : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+
+        // Mouse0 (Left Click) to shoot
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            rayCastShoot.Shoot();
         }
     }
 }
