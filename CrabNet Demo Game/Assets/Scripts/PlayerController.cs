@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float cameraYOffset = 0.4f;
     private Camera playerCamera;
+    [SerializeField]
+    private GameObject visor;
 
     // Shoot script reference
     [SerializeField]
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = Camera.main;
         playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
         playerCamera.transform.SetParent(transform);
+        visor.SetActive(false);
 
         characterController = GetComponent<CharacterController>();
 
