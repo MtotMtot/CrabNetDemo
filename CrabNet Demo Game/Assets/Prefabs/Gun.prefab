@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletTrail: {fileID: 7516343710559479261}
   bulletSpawnPoint: {fileID: 9220997984813731745}
-  shootDelay: 1
+  shootDelay: 0.2
   damage: 11
   playerLayer:
     serializedVersion: 2
