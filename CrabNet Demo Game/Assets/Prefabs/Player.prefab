@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7653398033227891849}
   - component: {fileID: 4736147845644868143}
   - component: {fileID: 1093712603714167857}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1102733402757208086}
   - component: {fileID: 6798480025351358875}
   - component: {fileID: 101599113964278006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 705524361217181653}
   - component: {fileID: 5354821239381249416}
   - component: {fileID: 876925243181718051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: PlayerObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
