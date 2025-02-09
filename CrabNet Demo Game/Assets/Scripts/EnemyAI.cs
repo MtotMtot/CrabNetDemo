@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
+    private float walkTimeOut;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -44,16 +45,20 @@ public class EnemyAI : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        // Debug ray
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
     }
 
     private void Patroling()
     {
-        if (!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet || walkTimeOut <= 0) SearchWalkPoint();
 
         if (walkPointSet)
             agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        walkTimeOut -= Time.deltaTime;
 
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
@@ -67,8 +72,9 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if ( Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround) && Physics.Linecast(transform.position, walkPoint, whatIsGround))
             walkPointSet = true;
+            walkTimeOut = 5f;
     }
 
     /// <summary>
@@ -81,8 +87,10 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        // #### will need to chnage to chase a chosen player from player list to function correctly in multipayer ####
+        // #### will need to change to chase a chosen player from player list to function correctly in multipayer ####
         agent.SetDestination(player.position);
+        // #### also needs to change to attack chosen player from player list. ####
+        transform.LookAt(player);
     }
 
 

@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7652645743064610044}
   - component: {fileID: 6894132424903480715}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.156, z: -3.74}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.371228, y: 5.21485, z: 6.371228}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 793888464157641276}
@@ -296,14 +296,14 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  health: 50
+  health: 500
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10
+  walkPointRange: 3
   timeBetweenAttacks: 1
   projectile: {fileID: 5551174811030083668, guid: df9bae7819561924e983da2f0e186034,
     type: 3}
-  sightRange: 25
-  attackRange: 18
+  sightRange: 60
+  attackRange: 55
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!1 &5230154829292430567
