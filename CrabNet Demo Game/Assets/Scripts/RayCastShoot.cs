@@ -29,9 +29,10 @@ public class RayCastShoot : MonoBehaviour
 
             lastShootTime = Time.time;
 
-            if (Physics.Raycast(bulletSpawnPoint.position, bulletSpawnPoint.forward, out RaycastHit hit)) // && hit.transform.CompareTag("EnemyCollider"))
+            if (Physics.Raycast(bulletSpawnPoint.position, bulletSpawnPoint.forward, out RaycastHit hit) && hit.transform.CompareTag("Enemy"))
             {
-                // do on hit effects (damage etc)
+                EnemyAI enemy = hit.transform.gameObject.GetComponent<EnemyAI>();
+                enemy.TakeDamage(damage);
             }
         } 
     }

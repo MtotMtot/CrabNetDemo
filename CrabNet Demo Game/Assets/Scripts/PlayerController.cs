@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private RayCastShoot rayCastShoot;
 
+    // Player Health reference
+    [SerializeField]
+    private PlayerHealth playerHealth;
+
     void Start()
     {
         playerCamera = Camera.main;
@@ -48,6 +52,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Invoke death if player health <= 0
+        if (playerHealth.health <= 0)
+        {
+            Invoke(nameof(Death), 0.5f);
+        }
+
         bool isRunning = false;
 
         // Press Left Shift to run
@@ -91,9 +101,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // Mouse0 (Left Click) to shoot
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && !isRunning && characterController.isGrounded)
         {
             rayCastShoot.Shoot();
         }
+    }
+
+    private void Death()
+    {
+        Destroy(this.gameObject);
     }
 }
