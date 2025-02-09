@@ -97,15 +97,25 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 80f, ForceMode.Impulse);
+            alreadyAttacked = true;
+            StartCoroutine(BurstAttack());
             //rb.AddForce(transform.up * 4f, ForceMode.Impulse);
             ///End of attack code
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+
+    private IEnumerator BurstAttack()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 80f, ForceMode.Impulse);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+    }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
