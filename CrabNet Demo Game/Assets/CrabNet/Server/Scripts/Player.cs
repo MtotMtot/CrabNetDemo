@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     {
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this);
-        //send shooting data packet here
     }
 
     /// <summary>Updates the player input with newly received input.</summary>

@@ -163,7 +163,7 @@ MonoBehaviour:
   username: 
   playerController: {fileID: 0}
   rayCastShoot: {fileID: 7389966730838048824}
-  cameraTransform: {fileID: 6687704015826900860}
+  playerCam: {fileID: 7999599920437964189}
 --- !u!1 &6567596099101859082
 GameObject:
   m_ObjectHideFlags: 0
