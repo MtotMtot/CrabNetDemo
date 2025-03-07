@@ -8,5 +8,5 @@ public class PlayerManager : MonoBehaviour
     public string username;
     public PlayerController playerController;
     public RayCastShoot rayCastShoot;
-    public Camera playerCam;
+    public GameObject playerCam;
 }
