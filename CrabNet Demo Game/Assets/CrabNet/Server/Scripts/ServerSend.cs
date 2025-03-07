@@ -112,7 +112,7 @@ public class ServerSend
             _packet.Write(_player.id);
             _packet.Write(_player.transform.position);
 
-            SendUDPDataToAll(_packet);
+            SendUDPDataToAll(_player.id, _packet);
         }
     }
 
