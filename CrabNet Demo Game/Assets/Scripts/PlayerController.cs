@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float lookXLimit = 45.0f;
 
     // Character controller reference
-    CharacterController characterController;
+    public CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
@@ -38,19 +38,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerCamera = Camera.main;
-        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-        playerCamera.transform.SetParent(transform);
         visor.SetActive(false);
-
-        characterController = GetComponent<CharacterController>();
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Invoke death if player health <= 0
         if (playerHealth.health <= 0)
@@ -105,6 +100,9 @@ public class PlayerController : MonoBehaviour
         {
             rayCastShoot.Shoot();
         }
+
+        // Send input to server
+        ClientSend.PlayerMovement();
     }
 
     private void Death()

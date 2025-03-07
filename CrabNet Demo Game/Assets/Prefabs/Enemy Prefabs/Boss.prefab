@@ -292,10 +292,10 @@ MonoBehaviour:
   player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   health: 500
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 3

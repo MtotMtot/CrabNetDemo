@@ -160,7 +160,7 @@ MonoBehaviour:
   damage: 11
   playerLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!114 &7516343710559479261
 MonoBehaviour:
   m_ObjectHideFlags: 0
