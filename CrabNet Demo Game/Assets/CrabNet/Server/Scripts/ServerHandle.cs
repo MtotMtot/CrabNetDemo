@@ -31,6 +31,4 @@ public class ServerHandle
 
         Server.serverClients[_fromClient].player.Shoot(_camTransfrom);
     }
-
-    //handle shooting data packet here
 }
