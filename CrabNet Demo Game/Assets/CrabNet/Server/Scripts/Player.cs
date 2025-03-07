@@ -43,8 +43,8 @@ public class Player : MonoBehaviour
         transform.rotation = _rotation;
     }
 
-    public void Shoot(Vector3 _camTransform)
+    public void Shoot(Vector3 _camPos, Quaternion _camRot)
     {
-        ServerSend.PlayerShoot(id, _camTransform);
+        ServerSend.PlayerShoot(id, _camPos, _camRot);
     }
 }

@@ -43,7 +43,8 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
         {
-            _packet.Write(GameManager.players[Client.instance.myId].playerCam.transform);
+            _packet.Write(GameManager.players[Client.instance.myId].playerCam.transform.position);
+            _packet.Write(GameManager.players[Client.instance.myId].playerCam.transform.rotation);
 
             SendUDPData(_packet);
         }

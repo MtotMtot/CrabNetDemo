@@ -140,12 +140,13 @@ public class ServerSend
 
     }
 
-    public static void PlayerShoot(int _playerId, Vector3 _camTransform)
+    public static void PlayerShoot(int _playerId, Vector3 _camPos, Quaternion _camRot)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerShoot))
         {
             _packet.Write(_playerId);
-            _packet.Write(_camTransform);
+            _packet.Write(_camPos);
+            _packet.Write(_camRot);
 
             SendUDPDataToAll(_playerId, _packet);
         }

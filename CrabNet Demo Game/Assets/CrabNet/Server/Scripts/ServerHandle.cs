@@ -27,8 +27,9 @@ public class ServerHandle
 
     public static void PlayerShoot(int _fromClient, Packet _packet)
     {
-        Vector3 _camTransfrom = _packet.ReadVector3();
+        Vector3 _camPos = _packet.ReadVector3();
+        Quaternion _camRot = _packet.ReadQuaternion();
 
-        Server.serverClients[_fromClient].player.Shoot(_camTransfrom);
+        Server.serverClients[_fromClient].player.Shoot(_camPos, _camRot);
     }
 }

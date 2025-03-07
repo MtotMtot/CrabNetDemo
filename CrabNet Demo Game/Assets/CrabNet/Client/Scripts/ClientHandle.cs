@@ -53,8 +53,10 @@ public class ClientHandle : MonoBehaviour
     public static void PlayerShoot(Packet _packet)
     {
         int _id = _packet.ReadInt();
-        Vector3 _camTransform = _packet.ReadVector3();
-        GameManager.players[_id].playerCam.transform.position = _camTransform;
+        Vector3 _camPos = _packet.ReadVector3();
+        Quaternion _camRot = _packet.ReadQuaternion();
+        GameManager.players[_id].playerCam.transform.position = _camPos;
+        GameManager.players[_id].playerCam.transform.rotation = _camRot;
         GameManager.players[_id].rayCastShoot.Shoot();
     }
 
