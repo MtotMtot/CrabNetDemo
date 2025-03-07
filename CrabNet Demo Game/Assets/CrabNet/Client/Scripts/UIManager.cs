@@ -23,10 +23,12 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
 
+
     }
 
     public void ConnectToServer()   //disables UI and connects to target IP (server).
     {
+        //NetworkManager.instance.gameObject.SetActive(false);
         startMenu.SetActive(false);
         usernameField.interactable = false;
         Client.instance.ConnectToServer();
@@ -34,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void HostServer()
     {
-        NetworkManager.instance.gameObject.SetActive(true);
+        NetworkManager.instance.StartServer();
         NetworkManager.instance.isHost = true;
         startMenu.SetActive(false);
         usernameField.interactable = false;

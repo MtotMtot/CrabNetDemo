@@ -50,5 +50,12 @@ public class ClientHandle : MonoBehaviour
         GameManager.players.Remove(_id);
     }
 
-    //handle shooting data packet here
+    public static void PlayerShoot(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        Vector3 _camTransform = _packet.ReadVector3();
+        GameManager.players[_id].playerCam.transform.position = _camTransform;
+        GameManager.players[_id].rayCastShoot.Shoot();
+    }
+
 }

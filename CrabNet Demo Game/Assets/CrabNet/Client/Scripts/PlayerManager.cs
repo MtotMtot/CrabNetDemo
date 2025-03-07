@@ -6,4 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public int id;
     public string username;
+    public PlayerController playerController;
+    public RayCastShoot rayCastShoot;
+    public Camera playerCam;
 }

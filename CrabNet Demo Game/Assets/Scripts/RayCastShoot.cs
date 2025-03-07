@@ -19,6 +19,9 @@ public class RayCastShoot : MonoBehaviour
 
     [SerializeField]
     private LayerMask playerLayer;
+
+    //  ClientSend variable
+    public Transform hitTransform;
     
 
     public void Shoot()

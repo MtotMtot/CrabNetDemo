@@ -39,6 +39,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    //player shoot packet goes here
+    public static void PlayerShoot()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
+        {
+            _packet.Write(GameManager.players[Client.instance.myId].playerController.cameraTransfrom);
+
+            SendUDPData(_packet);
+        }
+    }
     #endregion
 }

@@ -25,5 +25,12 @@ public class ServerHandle
         Server.serverClients[_fromClient].player.SetInput(_position, _rotation);
     }
 
+    public static void PlayerShoot(int _fromClient, Packet _packet)
+    {
+        Vector3 _camTransfrom = _packet.ReadVector3();
+
+        Server.serverClients[_fromClient].player.Shoot(_camTransfrom);
+    }
+
     //handle shooting data packet here
 }

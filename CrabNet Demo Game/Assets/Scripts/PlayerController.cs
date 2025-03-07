@@ -21,16 +21,16 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    // Camera reference + offset variable.
-    [SerializeField]
-    private float cameraYOffset = 0.4f;
-    private Camera playerCamera;
+    //camera transfrom ref
+    public Transform cameraTransfrom;
+
+    // visor reference
     [SerializeField]
     private GameObject visor;
 
     // Shoot script reference
     [SerializeField]
-    private RayCastShoot rayCastShoot;
+    public RayCastShoot rayCastShoot;
 
     // Player Health reference
     [SerializeField]
@@ -86,12 +86,11 @@ public class PlayerController : MonoBehaviour
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
-        // Player and Camera rotation
-        if (canMove && playerCamera != null)
+        // Player rotation
+        if (canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
@@ -99,6 +98,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && !isRunning && characterController.isGrounded)
         {
             rayCastShoot.Shoot();
+            ClientSend.PlayerShoot();
         }
 
         // Send input to server

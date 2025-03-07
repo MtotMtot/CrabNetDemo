@@ -43,4 +43,9 @@ public class Player : MonoBehaviour
         transform.position = _position;
         transform.rotation = _rotation;
     }
+
+    public void Shoot(Vector3 _camTransform)
+    {
+        ServerSend.PlayerShoot(id, _camTransform);
+    }
 }

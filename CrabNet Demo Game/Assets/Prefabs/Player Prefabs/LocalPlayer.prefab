@@ -168,7 +168,7 @@ MonoBehaviour:
   lookXLimit: 45
   characterController: {fileID: 6798480025351358875}
   canMove: 1
-  cameraYOffset: 0.4
+  cameraTransfrom: {fileID: 6687704015826900860}
   visor: {fileID: 2066390450133251952}
   rayCastShoot: {fileID: 7389966730838048824}
   playerHealth: {fileID: 2862798118517823194}
@@ -186,6 +186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
+  playerController: {fileID: 101599113964278006}
+  rayCastShoot: {fileID: 7389966730838048824}
+  cameraTransform: {fileID: 6687704015826900860}
 --- !u!1 &6567596099101859082
 GameObject:
   m_ObjectHideFlags: 0

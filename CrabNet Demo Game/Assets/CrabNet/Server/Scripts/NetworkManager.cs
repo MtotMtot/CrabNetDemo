@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void StartServer()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
