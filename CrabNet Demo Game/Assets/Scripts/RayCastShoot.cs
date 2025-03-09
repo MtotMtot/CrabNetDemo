@@ -17,9 +17,6 @@ public class RayCastShoot : MonoBehaviour
 
     private float lastShootTime;
 
-    [SerializeField]
-    private LayerMask playerLayer;
-
     //  ClientSend variable
     public Transform hitTransform;
     
@@ -36,6 +33,7 @@ public class RayCastShoot : MonoBehaviour
             {
                 EnemyAI enemy = hit.transform.gameObject.GetComponent<EnemyAI>();
                 enemy.TakeDamage(damage);
+                ClientSend.EnemyDamaged(enemy.id, damage);
             }
         } 
     }

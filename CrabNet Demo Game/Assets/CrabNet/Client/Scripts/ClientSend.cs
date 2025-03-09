@@ -49,5 +49,15 @@ public class ClientSend : MonoBehaviour
             SendUDPData(_packet);
         }
     }
+
+    public static void EnemyDamaged(int _enemyId, float _damage)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.enemyDamaged))
+        {
+            _packet.Write(_enemyId);
+            _packet.Write(_damage);
+            SendUDPData(_packet);
+        }
+    }
     #endregion
 }

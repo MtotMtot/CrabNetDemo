@@ -47,4 +47,9 @@ public class Player : MonoBehaviour
     {
         ServerSend.PlayerShoot(id, _camPos, _camRot);
     }
+
+    public void SetEnemyDamaged(int _enemyId, float _damage)
+    {
+        ServerSend.EnemyDamaged(id, _enemyId, _damage);
+    }
 }

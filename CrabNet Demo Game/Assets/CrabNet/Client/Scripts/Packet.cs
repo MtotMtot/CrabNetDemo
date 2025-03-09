@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +13,8 @@ public enum ServerPackets
     playerRotation,
     playerDisconnected,
     playerShoot,
+    enemyTarget,
+    enemyDamaged,
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -21,6 +23,8 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerShoot,
+    enemyTarget,
+    enemyDamaged,
 }
 
 public class Packet : IDisposable

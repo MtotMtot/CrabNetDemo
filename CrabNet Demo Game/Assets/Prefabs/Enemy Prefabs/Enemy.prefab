@@ -288,14 +288,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0325c357a2202c468e88ea567bfd808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  targetId: 0
+  isHost: 0
   agent: {fileID: 7652645743064610044}
   player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   health: 50
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10

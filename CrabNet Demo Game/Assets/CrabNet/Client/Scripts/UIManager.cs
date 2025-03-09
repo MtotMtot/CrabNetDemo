@@ -41,5 +41,9 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
         usernameField.interactable = false;
         Client.instance.ConnectToServer();
+        for (int i = 0; i < EnemyManager.enemies.Count; i++)
+        {
+            EnemyManager.enemies[i].GetComponent<EnemyAI>().isHost = true;
+        }
     }
 }

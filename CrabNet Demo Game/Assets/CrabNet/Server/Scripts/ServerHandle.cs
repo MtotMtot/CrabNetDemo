@@ -32,4 +32,11 @@ public class ServerHandle
 
         Server.serverClients[_fromClient].player.Shoot(_camPos, _camRot);
     }
+
+    public static void EnemyDamaged(int _fromClient, Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        float _damage = _packet.ReadFloat();
+        Server.serverClients[_fromClient].player.SetEnemyDamaged(_enemyId, _damage);
+    }
 }

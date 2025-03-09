@@ -280,6 +280,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.playerShoot, ClientHandle.PlayerShoot },
+            { (int)ServerPackets.enemyTarget, ClientHandle.EnemyTarget },
+            { (int)ServerPackets.enemyDamaged, ClientHandle.EnemyDamaged }
         };
         Debug.Log("Initialized packets.");
     }

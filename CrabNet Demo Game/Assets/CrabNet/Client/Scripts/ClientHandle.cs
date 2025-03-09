@@ -60,4 +60,17 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].rayCastShoot.Shoot();
     }
 
+    public static void EnemyTarget(Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        int _targetId = _packet.ReadInt();
+        EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().targetId = _targetId;
+    }
+
+    public static void EnemyDamaged(Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        float _damage = _packet.ReadFloat();
+        EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().TakeDamage(_damage);
+    }
 }

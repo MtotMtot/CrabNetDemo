@@ -152,5 +152,26 @@ public class ServerSend
         }
     }
 
+    public static void EnemyTarget(int _enemyId, int _targetId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.enemyTarget))
+        {
+            _packet.Write(_enemyId);
+            _packet.Write(_targetId);
+
+            SendUDPDataToAll(_packet);
+        }
+    }
+
+    public static void EnemyDamaged(int _playerId, int _enemyId, float _damage)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.enemyDamaged))
+        {
+            _packet.Write(_enemyId);
+            _packet.Write(_damage);
+            SendUDPDataToAll(_playerId, _packet);
+        }
+    }
+
     #endregion
 }

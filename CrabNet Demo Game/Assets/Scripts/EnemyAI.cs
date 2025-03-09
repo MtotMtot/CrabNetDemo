@@ -5,13 +5,25 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    // id reference from enemy manager
+    public int id = 0;
+
+    // target player id
+    public int targetId = 0;
+
+    // is this client host
+    public bool isHost = false;
+
+    //nav mesh agent
     public NavMeshAgent agent;
 
-    // #### needs to be list of players for multiplayer ####
+    //player transform
     public Transform player;
 
+    //layer masks
     public LayerMask whatIsGround, whatIsPlayer;
 
+    //health
     public float health;
 
     //Patroling
@@ -31,8 +43,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        // #### Will need to add to list forEach player in scene (3 for now) ####
-        player = GameObject.FindWithTag("PlayerObj").transform;
+        // get navmesh agent
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -42,9 +53,22 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (playerInSightRange && NetworkManager.instance.isHost){
+            // get player id and send to server if host client
+            GetPlayerId();
+            ServerSend.EnemyTarget(id, targetId);
+        }
+
+        if (!playerInSightRange && !playerInAttackRange && NetworkManager.instance.isHost){
+            Patroling();
+        }
+        if (playerInSightRange && !playerInAttackRange && targetId != 0){
+            ChasePlayer();
+        }
+        if (playerInAttackRange && playerInSightRange && targetId != 0)
+        {
+            AttackPlayer();
+        }
 
         // Debug ray
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
@@ -77,30 +101,43 @@ public class EnemyAI : MonoBehaviour
             walkTimeOut = 5f;
     }
 
+    private void GetPlayerId()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("PlayerObj"))
+            {
+                targetId = collider.gameObject.GetComponentInParent<PlayerManager>().id;
+            }
+        }
+    }
+
     /// <summary>
     /// 
-    /// Will need target player function here, can be done simply by closest player...
+    /// can have target player function here, can be done simply by closest player...
     /// For more complexity can add agro number, player actions add to this number for each player. highest number is target.
     /// (e.g. closest current player adds +10 every 1s. player hitting adds +20.    checks highest agro number every 5 second to avoid jittering between targets)
     /// 
     /// </summary>
 
+    // chase after target player
     private void ChasePlayer()
     {
         // #### will need to change to chase a chosen player from player list to function correctly in multipayer ####
-        agent.SetDestination(player.position);
+        agent.SetDestination(GameManager.players[targetId].transform.position);
         // #### also needs to change to attack chosen player from player list. ####
-        transform.LookAt(player);
+        transform.LookAt(GameManager.players[targetId].transform);
     }
 
 
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
+        agent.SetDestination(GameManager.players[targetId].transform.position);
 
         // #### also needs to change to attack chosen player from player list. ####
-        transform.LookAt(player);
+        transform.LookAt(GameManager.players[targetId].transform);
 
         if (!alreadyAttacked)
         {
@@ -137,7 +174,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     // visualises behaviour sphere sizes. Helps debug + tweak
