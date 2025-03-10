@@ -72,6 +72,9 @@ public class EnemyAI : MonoBehaviour
 
         // Debug ray
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
+
+        ServerSend.EnemyPosition(Client.instance.myId, id, transform.position);
+        ServerSend.EnemyRotation(Client.instance.myId, id, transform.rotation);
     }
 
     private void Patroling()
