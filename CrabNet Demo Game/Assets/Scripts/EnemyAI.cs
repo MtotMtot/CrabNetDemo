@@ -59,7 +59,7 @@ public class EnemyAI : MonoBehaviour
             ServerSend.EnemyTarget(id, targetId);
         }
 
-        if (!playerInSightRange && !playerInAttackRange){
+        if (!playerInSightRange && !playerInAttackRange && NetworkManager.instance.isHost){
             Patroling();
         }
         if (playerInSightRange && !playerInAttackRange && targetId != 0){
@@ -76,18 +76,22 @@ public class EnemyAI : MonoBehaviour
 
     private void Patroling()
     {
-        if (!walkPointSet || walkTimeOut <= 0) SearchWalkPoint();
+        if (!walkPointSet || walkTimeOut <= 0)
+        {
+            SearchWalkPoint();
+        }
 
         if (walkPointSet)
             agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         walkTimeOut -= Time.deltaTime;
-        Debug.Log(walkTimeOut);
 
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
+        {
             walkPointSet = false;
+        }
     }
 
     private void SearchWalkPoint()
@@ -98,9 +102,12 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if ( Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround) && Physics.Linecast(transform.position, walkPoint, whatIsGround))
+        if ( Physics.Raycast(walkPoint, -transform.up, 2f) && Physics.Linecast(transform.position, walkPoint))
+        {
             walkPointSet = true;
             walkTimeOut = 5f;
+        }
+            
     }
 
     private void GetPlayerId()
@@ -136,7 +143,7 @@ public class EnemyAI : MonoBehaviour
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
-        agent.SetDestination(GameManager.players[targetId].transform.position);
+        agent.SetDestination(transform.position);
 
         // #### also needs to change to attack chosen player from player list. ####
         transform.LookAt(GameManager.players[targetId].transform);

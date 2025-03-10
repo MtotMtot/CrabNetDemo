@@ -73,4 +73,18 @@ public class ClientHandle : MonoBehaviour
         float _damage = _packet.ReadFloat();
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().TakeDamage(_damage);
     }
+
+    public static void EnemyPosition(Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        Vector3 _enemyPosition = _packet.ReadVector3();
+        EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.position = _enemyPosition;
+    }
+
+    public static void EnemyRotation(Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        Quaternion _enemyRotation = _packet.ReadQuaternion();
+        EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.rotation = _enemyRotation;
+    }
 }

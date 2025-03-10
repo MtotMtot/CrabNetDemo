@@ -72,6 +72,7 @@ public class ServerSend
         }
     }
 
+
     #region Packets
     /// <summary>Sends a welcome message to the given client.</summary>
     /// <param name="_toClient">The client to send the packet to.</param>
@@ -170,6 +171,26 @@ public class ServerSend
             _packet.Write(_enemyId);
             _packet.Write(_damage);
             SendUDPDataToAll(_playerId, _packet);
+        }
+    }
+
+    public static void EnemyPosition(int _hostId, int _enemyId, Vector3 _enemyPosition)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.enemyPosition))
+        {
+            _packet.Write(_enemyId);
+            _packet.Write(_enemyPosition);
+            SendUDPDataToAll(_hostId, _packet);
+        }
+    }
+
+    public static void EnemyRotation(int _hostId, int _enemyId, Quaternion _enemyRotation)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.enemyRotation))
+        {
+            _packet.Write(_enemyId);
+            _packet.Write(_enemyRotation);
+            SendUDPDataToAll(_hostId, _packet);
         }
     }
 
