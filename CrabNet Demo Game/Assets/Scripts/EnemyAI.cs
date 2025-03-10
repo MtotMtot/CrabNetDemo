@@ -47,7 +47,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -59,7 +59,7 @@ public class EnemyAI : MonoBehaviour
             ServerSend.EnemyTarget(id, targetId);
         }
 
-        if (!playerInSightRange && !playerInAttackRange && NetworkManager.instance.isHost){
+        if (!playerInSightRange && !playerInAttackRange){
             Patroling();
         }
         if (playerInSightRange && !playerInAttackRange && targetId != 0){
@@ -83,11 +83,13 @@ public class EnemyAI : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         walkTimeOut -= Time.deltaTime;
+        Debug.Log(walkTimeOut);
 
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
+
     private void SearchWalkPoint()
     {
         //Calculate random point in range

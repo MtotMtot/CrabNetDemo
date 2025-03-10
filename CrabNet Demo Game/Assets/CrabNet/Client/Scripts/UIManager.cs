@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void ConnectToServer()   //disables UI and connects to target IP (server).
     {
-        //NetworkManager.instance.gameObject.SetActive(false);
+        // set menu to inactive, connect to server
         startMenu.SetActive(false);
         usernameField.interactable = false;
         Client.instance.ConnectToServer();
@@ -36,11 +37,16 @@ public class UIManager : MonoBehaviour
 
     public void HostServer()
     {
+        // start server, set menu to inactive
         NetworkManager.instance.StartServer();
         NetworkManager.instance.isHost = true;
         startMenu.SetActive(false);
         usernameField.interactable = false;
+
+        // connect to server (self)
         Client.instance.ConnectToServer();
+
+        // let all enemies on host client know they are on host
         for (int i = 0; i < EnemyManager.enemies.Count; i++)
         {
             EnemyManager.enemies[i].GetComponent<EnemyAI>().isHost = true;
