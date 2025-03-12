@@ -4,17 +4,50 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    //enemy distioanry reference
     public static Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
+    // EnemyManager instance
+    public static EnemyManager instance;
+
+    // enemy prefab reference
+    public GameObject enemyPrefab;
+
+    // spawn points array
+    public Transform[] spawnPoints;
+
+    public bool isHost = false;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
+
+    public void SpawnEnemy(int _id, Vector3 _spawnPos)
+    {
+        GameObject enemy = Instantiate(enemyPrefab, _spawnPos, Quaternion.identity);
+        enemy.GetComponent<EnemyAI>().id = _id;
+        enemy.GetComponent<EnemyAI>().isHost = isHost;
+        enemies.Add(_id, enemy);
+
+        // Send newly spawned enemy to all clients
+        ServerSend.SpawnEnemy(Client.instance.myId, _id, _spawnPos);
+    }
+    public void SpawnEnemies()
     {
         int i = 0;
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (Transform spawnPoint in spawnPoints)
         {
-            // add all enemies in scene to the dictionary
-            enemies.Add(i++, enemy);
-            enemy.GetComponent<EnemyAI>().id = i;
+            // spawn enemy at every spawn point and assign ID.
+            SpawnEnemy(i++, spawnPoint.position);
         }
     }
 }

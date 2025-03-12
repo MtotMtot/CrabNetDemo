@@ -53,12 +53,14 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+        // if player is in range, send their tagert id to all clients for their enemy instance.
         if (playerInSightRange && NetworkManager.instance.isHost){
             // get player id and send to server if host client
             GetPlayerId();
             ServerSend.EnemyTarget(id, targetId);
         }
 
+        // enemy behaviour states.
         if (!playerInSightRange && !playerInAttackRange && NetworkManager.instance.isHost){
             Patroling();
         }
@@ -77,6 +79,7 @@ public class EnemyAI : MonoBehaviour
         ServerSend.EnemyRotation(Client.instance.myId, id, transform.rotation);
     }
 
+    // move to walkpoints.
     private void Patroling()
     {
         if (!walkPointSet || walkTimeOut <= 0)
@@ -97,6 +100,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    // search for new a reachable walkpoint.
     private void SearchWalkPoint()
     {
         //Calculate random point in range
@@ -105,7 +109,8 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if ( Physics.Raycast(walkPoint, -transform.up, 2f) && Physics.Linecast(transform.position, walkPoint))
+        // check if walkpoint is on ground.
+        if ( Physics.Raycast(walkPoint, -transform.up, 1.8f, whatIsGround) )
         {
             walkPointSet = true;
             walkTimeOut = 5f;
@@ -113,6 +118,7 @@ public class EnemyAI : MonoBehaviour
             
     }
 
+    //check colliders in sight range for PlayerObj, get ID of player from parent.
     private void GetPlayerId()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
@@ -143,24 +149,22 @@ public class EnemyAI : MonoBehaviour
     }
 
 
+    // attack player when in range
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
-        // #### also needs to change to attack chosen player from player list. ####
         transform.LookAt(GameManager.players[targetId].transform);
 
         if (!alreadyAttacked)
         {
-            ///Attack code here
             alreadyAttacked = true;
             StartCoroutine(BurstAttack());
-            //rb.AddForce(transform.up * 4f, ForceMode.Impulse);
-            ///End of attack code
         }
     }
 
+    // busrt attack for AttackPlayer(), shoots 3 projectiles per attack.
     private IEnumerator BurstAttack()
     {
         for (int i = 0; i < 3; i++)
@@ -170,6 +174,7 @@ public class EnemyAI : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
+        // use invoke to have cooldown between bursts.
         Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
 
@@ -178,12 +183,16 @@ public class EnemyAI : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    // Take damage from player
     public void TakeDamage(float damage)
     {
         health -= damage;
 
+        // if health <= 0, destroy self.
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
+
+    // Destroy self on death
     private void DestroyEnemy()
     {
         Destroy(this.gameObject);

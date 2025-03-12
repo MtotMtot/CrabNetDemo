@@ -37,19 +37,20 @@ public class UIManager : MonoBehaviour
 
     public void HostServer()
     {
-        // start server, set menu to inactive
+        // start server, set isHost to true
         NetworkManager.instance.StartServer();
         NetworkManager.instance.isHost = true;
+
+        // tell this enemyManager its on host, spawn all enemies
+        EnemyManager.instance.isHost = true;
+        EnemyManager.instance.SpawnEnemies();
+
+        // disable startMenu and InputField
         startMenu.SetActive(false);
         usernameField.interactable = false;
 
-        // connect to server (self)
+        // connect to server (this client)
         Client.instance.ConnectToServer();
 
-        // let all enemies on host client know they are on host
-        for (int i = 0; i < EnemyManager.enemies.Count; i++)
-        {
-            EnemyManager.enemies[i].GetComponent<EnemyAI>().isHost = true;
-        }
     }
 }

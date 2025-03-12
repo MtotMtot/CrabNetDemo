@@ -87,4 +87,11 @@ public class ClientHandle : MonoBehaviour
         Quaternion _enemyRotation = _packet.ReadQuaternion();
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.rotation = _enemyRotation;
     }
+
+    public static void EnemySpawn(Packet _packet)
+    {
+        int _enemyId = _packet.ReadInt();
+        Vector3 _spawnPos = _packet.ReadVector3();
+        EnemyManager.instance.SpawnEnemy(_enemyId, _spawnPos);
+    }
 }

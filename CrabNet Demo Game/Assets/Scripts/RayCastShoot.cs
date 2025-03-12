@@ -31,7 +31,7 @@ public class RayCastShoot : MonoBehaviour
 
             if (Physics.Raycast(bulletSpawnPoint.position, bulletSpawnPoint.forward, out RaycastHit hit) && hit.transform.CompareTag("Enemy"))
             {
-                EnemyAI enemy = hit.transform.gameObject.GetComponent<EnemyAI>();
+                EnemyAI enemy = hit.transform.gameObject.GetComponentInParent<EnemyAI>();
                 enemy.TakeDamage(damage);
                 ClientSend.EnemyDamaged(enemy.id, damage);
             }
