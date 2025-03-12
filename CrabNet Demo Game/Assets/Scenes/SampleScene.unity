@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 2544149407693545255, guid: 3074fe3d444a8b94cb98d0cfd6b74939,
         type: 3}
       propertyPath: ip
-      value: 127.0.0.1
+      value: 192.168.1.146
       objectReference: {fileID: 0}
     - target: {fileID: 3325379370915889503, guid: 3074fe3d444a8b94cb98d0cfd6b74939,
         type: 3}
@@ -695,37 +695,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &877013744
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 877013745}
-  m_Layer: 0
-  m_Name: SpawnPoint (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &877013745
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877013744}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.3, y: 0.02, z: 41.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1590,7 +1559,7 @@ PrefabInstance:
     - target: {fileID: 1936578218908165612, guid: 9f6b82c8005eeb540b2ba4edd6ad9f75,
         type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1936578218908165612, guid: 9f6b82c8005eeb540b2ba4edd6ad9f75,
         type: 3}
@@ -1606,7 +1575,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'spawnPoits.Array.data[2]'
       value: 
-      objectReference: {fileID: 877013745}
+      objectReference: {fileID: 0}
     - target: {fileID: 1936578218908165612, guid: 9f6b82c8005eeb540b2ba4edd6ad9f75,
         type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
@@ -1621,7 +1590,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'spawnPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 877013745}
+      objectReference: {fileID: 0}
     - target: {fileID: 5736843566156235154, guid: 9f6b82c8005eeb540b2ba4edd6ad9f75,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1694,4 +1663,3 @@ SceneRoots:
   - {fileID: 8003139224723671125}
   - {fileID: 1038415128}
   - {fileID: 963181595}
-  - {fileID: 877013745}

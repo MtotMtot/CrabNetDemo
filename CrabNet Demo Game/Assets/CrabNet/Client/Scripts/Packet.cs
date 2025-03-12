@@ -17,7 +17,7 @@ public enum ServerPackets
     enemyDamaged,
     enemyPosition,
     enemyRotation,
-    enemySpawn,
+    spawnEnemy,
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -27,10 +27,6 @@ public enum ClientPackets
     playerMovement,
     playerShoot,
     enemyDamaged,
-    enemySpawn,
-    /*enemyTarget,
-    enemyPosition,
-    enemyRotation,*/
 }
 
 public class Packet : IDisposable

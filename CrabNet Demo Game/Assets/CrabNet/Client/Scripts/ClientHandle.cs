@@ -88,8 +88,9 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.rotation = _enemyRotation;
     }
 
-    public static void EnemySpawn(Packet _packet)
+    public static void SpawnEnemy(Packet _packet)
     {
+        Debug.Log("Received spawn enemy packet from Server");
         int _enemyId = _packet.ReadInt();
         Vector3 _spawnPos = _packet.ReadVector3();
         EnemyManager.instance.SpawnEnemy(_enemyId, _spawnPos);

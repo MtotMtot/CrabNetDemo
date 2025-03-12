@@ -196,11 +196,11 @@ public class ServerSend
 
     public static void SpawnEnemy(int _hostId, int _id, Vector3 _spawnPos)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.enemySpawn))
+        using (Packet _packet = new Packet((int)ServerPackets.spawnEnemy))
         {
             _packet.Write(_id);
             _packet.Write(_spawnPos);
-            SendUDPDataToAll(_hostId, _packet);
+            SendUDPDataToAll(_packet);
         }
     }
 

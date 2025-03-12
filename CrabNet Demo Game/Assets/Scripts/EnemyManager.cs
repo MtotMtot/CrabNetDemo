@@ -37,9 +37,6 @@ public class EnemyManager : MonoBehaviour
         enemy.GetComponent<EnemyAI>().id = _id;
         enemy.GetComponent<EnemyAI>().isHost = isHost;
         enemies.Add(_id, enemy);
-
-        // Send newly spawned enemy to all clients
-        ServerSend.SpawnEnemy(Client.instance.myId, _id, _spawnPos);
     }
     public void SpawnEnemies()
     {
@@ -48,6 +45,9 @@ public class EnemyManager : MonoBehaviour
         {
             // spawn enemy at every spawn point and assign ID.
             SpawnEnemy(i++, spawnPoint.position);
+
+            // Send newly spawned enemy to all clients
+            ServerSend.SpawnEnemy(Client.instance.myId, i, spawnPoint.position);
         }
     }
 }
