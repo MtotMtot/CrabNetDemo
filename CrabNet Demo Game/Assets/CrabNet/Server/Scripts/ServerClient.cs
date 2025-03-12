@@ -234,7 +234,7 @@ public class ServerClient
             {
                 ServerSend.SpawnPlayer(_client.id, player);
             }
-        }
+        }        
     }
 
     /// <summary>Disconnects the client and stops all network traffic.</summary>

@@ -31,23 +31,28 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // Used by connected clients to spawn in all enemies from host.
     public void SpawnEnemy(int _id, Vector3 _spawnPos)
     {
-        GameObject enemy = Instantiate(enemyPrefab, _spawnPos, Quaternion.identity);
-        enemy.GetComponent<EnemyAI>().id = _id;
-        enemy.GetComponent<EnemyAI>().isHost = isHost;
-        enemies.Add(_id, enemy);
+        // if enemy id alrady exists in dictinoary, dont spawn
+        if (!enemies.ContainsKey(_id))
+        {
+            GameObject enemy = Instantiate(enemyPrefab, _spawnPos, Quaternion.identity);
+            enemy.GetComponent<EnemyAI>().id = _id;
+            enemy.GetComponent<EnemyAI>().isHost = isHost;
+            enemies.Add(_id, enemy);
+        }
+        
     }
+
+    //Used by host to spawn all enemies initially.
     public void SpawnEnemies()
     {
-        int i = 0;
+        int i = 1;
         foreach (Transform spawnPoint in spawnPoints)
         {
             // spawn enemy at every spawn point and assign ID.
             SpawnEnemy(i++, spawnPoint.position);
-
-            // Send newly spawned enemy to all clients
-            ServerSend.SpawnEnemy(Client.instance.myId, i, spawnPoint.position);
         }
     }
 }

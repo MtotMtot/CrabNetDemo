@@ -19,6 +19,13 @@ public class Player : MonoBehaviour
     {
         id = _id;
         username = _username;
+
+        foreach (GameObject enemy in EnemyManager.enemies.Values)
+        {
+            // Send all enemies to new client
+            Debug.Log("Sent spawn enemy");
+            ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+        }
     }
 
     /// <summary>Processes player input and moves the player.</summary>
