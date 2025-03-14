@@ -20,6 +20,9 @@ public class Client : MonoBehaviour
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
+    /// <summary>
+    /// Singleton this.
+    /// </summary>
     private void Awake()
     {
         if (instance == null)
@@ -33,17 +36,26 @@ public class Client : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// initialize new TCP and UDP clients.
+    /// </summary>
     private void Start()
     {
         tcp = new TCP();
         udp = new UDP();
     }
 
+    /// <summary>
+    /// Disconnect on app close.
+    /// </summary>
     private void OnApplicationQuit()
     {
         Disconnect();
     }
 
+    /// <summary>
+    /// Initialize client data, connect to server.
+    /// </summary>
     public void ConnectToServer()
     {
         InitializeClientData();
@@ -52,6 +64,9 @@ public class Client : MonoBehaviour
         tcp.Connect();
     }
 
+    /// <summary>
+    /// TCP class
+    /// </summary>
     public class TCP
     {
         public TcpClient socket;
@@ -60,6 +75,9 @@ public class Client : MonoBehaviour
         private Packet receivedData;
         private byte[] receiveBuffer;
 
+        /// <summary>
+        /// set socket to new TCP client, set buffer sizes and begin connect to target IP.
+        /// </summary>
         public void Connect()
         {
             socket = new TcpClient
@@ -72,6 +90,10 @@ public class Client : MonoBehaviour
             socket.BeginConnect(instance.ip, instance.port, ConnectCallback, socket);
         }
 
+        /// <summary>
+        /// Connect call back from target IP, if success: begin reading stream.
+        /// </summary>
+        /// <param name="_result"></param>
         private void ConnectCallback(IAsyncResult _result)
         {
             socket.EndConnect(_result);
@@ -88,6 +110,10 @@ public class Client : MonoBehaviour
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 
+        /// <summary>
+        /// Send Data (_packet) to target IP
+        /// </summary>
+        /// <param name="_packet"></param>
         public void SendData(Packet _packet)
         {
             try
@@ -103,6 +129,10 @@ public class Client : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Call back from data stream, if byte length is <= 0 or error in receiving call back, connection is closed: disconnect.
+        /// </summary>
+        /// <param name="_result"></param>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
@@ -126,6 +156,11 @@ public class Client : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Handle received data.
+        /// </summary>
+        /// <param name="_data"></param>
+        /// <returns></returns>
         private bool HandleData(byte[] _data)
         {
             int _packetLength = 0;
@@ -172,6 +207,9 @@ public class Client : MonoBehaviour
             return false;
         }
 
+        /// <summary>
+        /// Disconenct client, reset stream, buffer and socket.
+        /// </summary>
         private void Disconnect()
         {
             instance.Disconnect();
@@ -183,6 +221,9 @@ public class Client : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// UDP class.
+    /// </summary>
     public class UDP
     {
         public UdpClient socket;
@@ -193,6 +234,10 @@ public class Client : MonoBehaviour
             endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), instance.port);
         }
 
+        /// <summary>
+        /// set socket to new UDP client, connect to target endpoint.
+        /// </summary>
+        /// <param name="_localPort"></param>
         public void Connect(int _localPort)
         {
             socket = new UdpClient(_localPort);
@@ -206,6 +251,10 @@ public class Client : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Send data to target endpoint.
+        /// </summary>
+        /// <param name="_packet"></param>
         public void SendData(Packet _packet)
         {
             try
@@ -222,6 +271,10 @@ public class Client : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Receive call back from target endpoint, if length < 4 or fail to receive data: connection closed -> disconnect.
+        /// </summary>
+        /// <param name="_result"></param>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
@@ -243,6 +296,10 @@ public class Client : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Handle received data from endpoint.
+        /// </summary>
+        /// <param name="_data"></param>
         private void HandleData(byte[] _data)
         {
             using (Packet _packet = new Packet(_data))
@@ -261,6 +318,9 @@ public class Client : MonoBehaviour
             });
         }
 
+        /// <summary>
+        /// Disconenct UDP client, set endpoint and socket to null.
+        /// </summary>
         private void Disconnect()
         {
             instance.Disconnect();
@@ -270,6 +330,9 @@ public class Client : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Initialize client data: map client packets to server packets.
+    /// </summary>
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
@@ -289,6 +352,9 @@ public class Client : MonoBehaviour
         Debug.Log("Initialized packets.");
     }
 
+    /// <summary>
+    /// Disconect for this client, close UDP and TCP clients.
+    /// </summary>
     private void Disconnect()
     {
         if (isConnected)

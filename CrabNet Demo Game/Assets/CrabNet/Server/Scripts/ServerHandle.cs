@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ServerHandle
 {
+    /// <summary>
+    /// Received welcome packet from client, send that client into game and initialize their data.
+    /// </summary>
+    /// <param name="_fromClient"></param>
+    /// <param name="_packet"></param>
     public static void WelcomeReceived(int _fromClient, Packet _packet)
     {
         int _clientIdCheck = _packet.ReadInt();
@@ -17,6 +22,11 @@ public class ServerHandle
         Server.serverClients[_fromClient].SendIntoGame(_username);
     }
 
+    /// <summary>
+    /// Receive player movement from client
+    /// </summary>
+    /// <param name="_fromClient"></param>
+    /// <param name="_packet"></param>
     public static void PlayerMovement(int _fromClient, Packet _packet)
     {
         Vector3 _position = _packet.ReadVector3();
@@ -25,6 +35,11 @@ public class ServerHandle
         Server.serverClients[_fromClient].player.SetInput(_position, _rotation);
     }
 
+    /// <summary>
+    /// Receive player shooting from client
+    /// </summary>
+    /// <param name="_fromClient"></param>
+    /// <param name="_packet"></param>
     public static void PlayerShoot(int _fromClient, Packet _packet)
     {
         Vector3 _camPos = _packet.ReadVector3();
@@ -33,6 +48,11 @@ public class ServerHandle
         Server.serverClients[_fromClient].player.Shoot(_camPos, _camRot);
     }
 
+    /// <summary>
+    /// Receive enemy damaged from client
+    /// </summary>
+    /// <param name="_fromClient"></param>
+    /// <param name="_packet"></param>
     public static void EnemyDamaged(int _fromClient, Packet _packet)
     {
         int _enemyId = _packet.ReadInt();

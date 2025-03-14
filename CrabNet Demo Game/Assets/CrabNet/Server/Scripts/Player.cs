@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // id and user name reference
     public int id;
     public string username;
 
+    // player collider reference
     public CapsuleCollider capsuleCollider;
+
+    /// <summary>
+    /// disables capsule collider of server instance of client for the host.
+    /// </summary>
     void Start()
     {
         if (NetworkManager.instance != null)
@@ -15,6 +21,12 @@ public class Player : MonoBehaviour
             capsuleCollider.enabled = false;
         }
     }
+
+    /// <summary>
+    /// initialize client data
+    /// </summary>
+    /// <param name="_id"></param>
+    /// <param name="_username"></param>
     public void Initialize(int _id, string _username)
     {
         id = _id;
@@ -50,11 +62,21 @@ public class Player : MonoBehaviour
         transform.rotation = _rotation;
     }
 
+    /// <summary>
+    /// Tells all players this client is shooting.
+    /// </summary>
+    /// <param name="_camPos"></param>
+    /// <param name="_camRot"></param>
     public void Shoot(Vector3 _camPos, Quaternion _camRot)
     {
         ServerSend.PlayerShoot(id, _camPos, _camRot);
     }
 
+    /// <summary>
+    /// Tells all players this client damaged an enemy.
+    /// </summary>
+    /// <param name="_enemyId"></param>
+    /// <param name="_damage"></param>
     public void SetEnemyDamaged(int _enemyId, float _damage)
     {
         ServerSend.EnemyDamaged(id, _enemyId, _damage);

@@ -8,36 +8,36 @@ public class EnemyAI : MonoBehaviour
     // id reference from enemy manager
     public int id = 0;
 
-    // target player id
+    // target player id reference.
     public int targetId = 0;
 
-    // is this client host
+    // Is this client host reference.
     public bool isHost = false;
 
-    //nav mesh agent
+    // nav mesh agent reference.
     public NavMeshAgent agent;
 
-    //player transform
+    // player transform reference.
     public Transform player;
 
-    //layer masks
+    // layer masks reference.
     public LayerMask whatIsGround, whatIsPlayer;
 
-    //health
+    // health reference.
     public float health;
 
-    //Patroling
+    // Patroling reference.
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
     private float walkTimeOut;
 
-    //Attacking
+    // Attacking reference.
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
 
-    //States
+    // States reference.
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
@@ -54,7 +54,8 @@ public class EnemyAI : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         // if player is in range, send their tagert id to all clients for their enemy instance.
-        if (playerInSightRange && NetworkManager.instance.isHost){
+        if (playerInSightRange && NetworkManager.instance.isHost)
+        {
             // get player id and send to server if host client
             GetPlayerId();
             ServerSend.EnemyTarget(id, targetId);
@@ -79,7 +80,9 @@ public class EnemyAI : MonoBehaviour
         ServerSend.EnemyRotation(Client.instance.myId, id, transform.rotation);
     }
 
-    // move to walkpoints.
+    /// <summary>
+    /// move to walkpoints.
+    /// </summary>
     private void Patroling()
     {
         if (!walkPointSet || walkTimeOut <= 0)
@@ -100,7 +103,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // search for new a reachable walkpoint.
+    /// <summary>
+    /// search for new a reachable walkpoint.
+    /// </summary>
     private void SearchWalkPoint()
     {
         //Calculate random point in range
@@ -118,7 +123,9 @@ public class EnemyAI : MonoBehaviour
             
     }
 
-    //check colliders in sight range for PlayerObj, get ID of player from parent.
+    /// <summary>
+    /// check colliders in sight range for PlayerObj, get ID of player from parent.
+    /// </summary>
     private void GetPlayerId()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
@@ -132,24 +139,18 @@ public class EnemyAI : MonoBehaviour
     }
 
     /// <summary>
-    /// 
-    /// can have target player function here, can be done simply by closest player...
-    /// For more complexity can add agro number, player actions add to this number for each player. highest number is target.
-    /// (e.g. closest current player adds +10 every 1s. player hitting adds +20.    checks highest agro number every 5 second to avoid jittering between targets)
-    /// 
+    /// chase after target player
     /// </summary>
-
-    // chase after target player
     private void ChasePlayer()
     {
-        // #### will need to change to chase a chosen player from player list to function correctly in multipayer ####
         agent.SetDestination(GameManager.players[targetId].transform.position);
-        // #### also needs to change to attack chosen player from player list. ####
         transform.LookAt(GameManager.players[targetId].transform);
     }
 
 
-    // attack player when in range
+    /// <summary>
+    /// attack player when in range
+    /// </summary>
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
@@ -164,7 +165,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // busrt attack for AttackPlayer(), shoots 3 projectiles per attack.
+    /// <summary>
+    /// busrt attack for AttackPlayer(), shoots 3 projectiles per attack.
+    /// </summary>
     private IEnumerator BurstAttack()
     {
         for (int i = 0; i < 3; i++)
@@ -178,12 +181,18 @@ public class EnemyAI : MonoBehaviour
         Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
 
+    /// <summary>
+    /// Reset attack
+    /// </summary>
     private void ResetAttack()
     {
         alreadyAttacked = false;
     }
 
-    // Take damage from player
+    /// <summary>
+    /// Take damage from player
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -192,13 +201,17 @@ public class EnemyAI : MonoBehaviour
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 
-    // Destroy self on death
+    /// <summary>
+    /// Destroy self on death
+    /// </summary>
     private void DestroyEnemy()
     {
         Destroy(this.gameObject);
     }
 
-    // visualises behaviour sphere sizes. Helps debug + tweak
+    /// <summary>
+    /// visualises behaviour sphere sizes. Helps debug + tweak
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

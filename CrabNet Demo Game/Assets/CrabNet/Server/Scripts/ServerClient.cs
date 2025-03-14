@@ -14,6 +14,10 @@ public class ServerClient
     public TCP tcp;
     public UDP udp;
 
+    /// <summary>
+    /// ServerClient constructor
+    /// </summary>
+    /// <param name="_clientId"></param>
     public ServerClient(int _clientId)
     {
         id = _clientId;
@@ -21,6 +25,9 @@ public class ServerClient
         udp = new UDP(id);
     }
 
+    /// <summary>
+    /// TCP class
+    /// </summary>
     public class TCP
     {
         public TcpClient socket;
@@ -159,6 +166,9 @@ public class ServerClient
         }
     }
 
+    /// <summary>
+    /// UDP class
+    /// </summary>
     public class UDP
     {
         public IPEndPoint endPoint;
@@ -251,6 +261,7 @@ public class ServerClient
         tcp.Disconnect();
         udp.Disconnect();
 
+        // Send player disconnect to all connected clients
         ServerSend.PlayerDisconnected(id);
     }
 }

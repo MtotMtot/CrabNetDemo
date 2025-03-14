@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
 
+    /// <summary>
+    /// Singleton this.
+    /// </summary>
     private void Awake()
     {
         if (instance == null)
@@ -24,6 +27,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spwan player with (id, username, positio, rotation) for this client instance.
+    /// </summary>
+    /// <param name="_id"></param>
+    /// <param name="_username"></param>
+    /// <param name="_position"></param>
+    /// <param name="_rotation"></param>
     public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation)
     {
         GameObject _player;

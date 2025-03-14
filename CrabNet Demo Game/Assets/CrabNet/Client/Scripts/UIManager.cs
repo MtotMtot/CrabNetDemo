@@ -6,12 +6,17 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
+    // instance reference.
     public static UIManager instance;
 
+    // start menu and input field reference.
     public GameObject startMenu;
     public InputField usernameField;
 
-    private void Awake()    //set instance to this, destroy copies.
+    /// <summary>
+    /// Singleton this.
+    /// </summary>
+    private void Awake()
     {
         if (instance == null)
         {
@@ -27,7 +32,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ConnectToServer()   //disables UI and connects to target IP (server).
+    /// <summary>
+    /// disables UI and connects to target IP (server).
+    /// </summary>
+    public void ConnectToServer()   
     {
         // set menu to inactive, connect to server
         startMenu.SetActive(false);

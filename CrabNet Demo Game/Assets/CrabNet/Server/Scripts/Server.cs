@@ -27,10 +27,12 @@ public class Server
         Debug.Log("Starting server...");
         InitializeServerData();
 
+        // creates new TCP listener and begins accepting connections.
         tcpListener = new TcpListener(IPAddress.Any, Port);
         tcpListener.Start();
         tcpListener.BeginAcceptTcpClient(TCPConnectCallback, null);
 
+        // creates new UDP listener and begins accepting connections.
         udpListener = new UdpClient(Port);
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
@@ -44,6 +46,8 @@ public class Server
         tcpListener.BeginAcceptTcpClient(TCPConnectCallback, null);
         Debug.Log($"Incoming connection from {_ServerClient.Client.RemoteEndPoint}...");
 
+
+        // searches for next availalbe spot in ServerClients list.
         for (int i = 1; i <= MaxPlayers; i++)
         {
             if (serverClients[i].tcp.socket == null)
@@ -135,6 +139,9 @@ public class Server
         Debug.Log("Initialized packets.");
     }
 
+    /// <summary>
+    /// stops receiving for both TCP and UDP listeners
+    /// </summary>
     public static void Stop()
     {
         tcpListener.Stop();

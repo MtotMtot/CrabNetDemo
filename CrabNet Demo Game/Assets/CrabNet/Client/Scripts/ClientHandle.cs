@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ClientHandle : MonoBehaviour
 {
+    /// <summary>
+    /// Welcome packet received from server, send welcome received.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void Welcome(Packet _packet)
     {
         string _msg = _packet.ReadString();
@@ -17,6 +21,10 @@ public class ClientHandle : MonoBehaviour
         Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
     }
 
+    /// <summary>
+    /// Spawn player packet from server, instantiate player prefab with: id, username, position, rotation.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void SpawnPlayer(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -27,6 +35,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.instance.SpawnPlayer(_id, _username, _position, _rotation);
     }
 
+    /// <summary>
+    /// Player position for player(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void PlayerPosition(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -35,6 +47,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].transform.position = _position;
     }
 
+    /// <summary>
+    /// Player rotation for player(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void PlayerRotation(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -43,6 +59,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].transform.rotation = _rotation;
     }
 
+    /// <summary>
+    /// Player disconnect for player(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void PlayerDisconnected(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -50,6 +70,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.players.Remove(_id);
     }
 
+    /// <summary>
+    /// Player shoot for player(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void PlayerShoot(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -60,6 +84,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].rayCastShoot.Shoot();
     }
 
+    /// <summary>
+    /// Enemy for target for enemy(id), targeting: (player id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void EnemyTarget(Packet _packet)
     {
         int _enemyId = _packet.ReadInt();
@@ -67,6 +95,10 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().targetId = _targetId;
     }
 
+    /// <summary>
+    /// Enemy damaged from player (id) for enemy(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void EnemyDamaged(Packet _packet)
     {
         int _enemyId = _packet.ReadInt();
@@ -74,6 +106,10 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().TakeDamage(_damage);
     }
 
+    /// <summary>
+    /// Enemy position for enemy(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void EnemyPosition(Packet _packet)
     {
         int _enemyId = _packet.ReadInt();
@@ -81,6 +117,10 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.position = _enemyPosition;
     }
 
+    /// <summary>
+    /// Enemy rotation for enemy(id) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void EnemyRotation(Packet _packet)
     {
         int _enemyId = _packet.ReadInt();
@@ -88,6 +128,10 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.enemies[_enemyId].GetComponent<EnemyAI>().transform.rotation = _enemyRotation;
     }
 
+    /// <summary>
+    /// Spawn enemy with (id, position) from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void SpawnEnemy(Packet _packet)
     {
         Debug.Log("Received spawn enemy packet from Server");

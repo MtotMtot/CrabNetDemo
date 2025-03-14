@@ -107,6 +107,7 @@ public class ServerSend
     /// <summary>Sends a player's updated position to all clients.</summary>
     /// <param name="_player">The player whose position to update.</param>
     public static void PlayerPosition(Player _player)
+
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerPosition))
         {
@@ -118,7 +119,6 @@ public class ServerSend
     }
 
     /// <summary>Sends a player's updated rotation to all clients except to himself (to avoid overwriting the local player's rotation).</summary>
-    /// <param name="_player">The player whose rotation to update.</param>
     public static void PlayerRotation(Player _player)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerRotation))
@@ -130,6 +130,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send player disconncted to all clients to properly handle player disconnecting, prevents null referencing</summary>
     public static void PlayerDisconnected(int _playerId)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
@@ -141,6 +142,7 @@ public class ServerSend
 
     }
 
+    /// <summary>Send player shoot to all clients except the client shooting.</summary>
     public static void PlayerShoot(int _playerId, Vector3 _camPos, Quaternion _camRot)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerShoot))
@@ -153,6 +155,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send Enemy target to all clients, prevents need to send enemy actions over network such as shooting or chasing, all handled locally.</summary>
     public static void EnemyTarget(int _enemyId, int _targetId)
     {
         using (Packet _packet = new Packet((int)ServerPackets.enemyTarget))
@@ -164,6 +167,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send enemy damaged from client to all players except the client who did damaged.</summary>
     public static void EnemyDamaged(int _playerId, int _enemyId, float _damage)
     {
         using (Packet _packet = new Packet((int)ServerPackets.enemyDamaged))
@@ -174,6 +178,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send enemy position to all clients except host.</summary>
     public static void EnemyPosition(int _hostId, int _enemyId, Vector3 _enemyPosition)
     {
         using (Packet _packet = new Packet((int)ServerPackets.enemyPosition))
@@ -184,6 +189,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send enemy rotation to all clients except host.</summary>
     public static void EnemyRotation(int _hostId, int _enemyId, Quaternion _enemyRotation)
     {
         using (Packet _packet = new Packet((int)ServerPackets.enemyRotation))
@@ -194,6 +200,7 @@ public class ServerSend
         }
     }
 
+    /// <summary>Send enemy spawn to target client (most recent to connect).</summary>
     public static void SpawnEnemy(int _playerId, int _id, Vector3 _spawnPos)
     {
         using (Packet _packet = new Packet((int)ServerPackets.spawnEnemy))

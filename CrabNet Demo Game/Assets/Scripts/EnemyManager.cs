@@ -7,17 +7,20 @@ public class EnemyManager : MonoBehaviour
     //enemy distioanry reference
     public static Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
-    // EnemyManager instance
+    // instance reference.
     public static EnemyManager instance;
 
     // enemy prefab reference
     public GameObject enemyPrefab;
 
-    // spawn points array
+    // spawn points array reference.
     public Transform[] spawnPoints;
 
     public bool isHost = false;
 
+    /// <summary>
+    /// Singleton this.
+    /// </summary>
     public void Awake()
     {
         if (instance == null)
@@ -31,7 +34,11 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // Used by connected clients to spawn in all enemies from host.
+    /// <summary>
+    /// Used by connected clients to spawn in all enemies from host.
+    /// </summary>
+    /// <param name="_id"></param>
+    /// <param name="_spawnPos"></param>
     public void SpawnEnemy(int _id, Vector3 _spawnPos)
     {
         // if enemy id alrady exists in dictinoary, dont spawn
@@ -45,7 +52,9 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    //Used by host to spawn all enemies initially.
+    /// <summary>
+    /// Used by host to spawn all enemies initially.
+    /// </summary>
     public void SpawnEnemies()
     {
         int i = 1;

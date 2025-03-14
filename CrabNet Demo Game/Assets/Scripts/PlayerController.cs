@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Movement Variables
+    // Movement Variables references
     [Header("Base setup")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    //camera transfrom ref
+    //camera transfrom reference
     public Transform cameraTransfrom;
 
     // visor reference
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // disable visor for this client.
         visor.SetActive(false);
 
         // Lock cursor
@@ -105,6 +106,9 @@ public class PlayerController : MonoBehaviour
         ClientSend.PlayerMovement();
     }
 
+    /// <summary>
+    /// Destroy this gameObject on death.
+    /// </summary>
     private void Death()
     {
         Destroy(this.gameObject);

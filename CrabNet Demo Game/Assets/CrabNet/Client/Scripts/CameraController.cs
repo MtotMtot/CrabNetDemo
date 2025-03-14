@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // player reference
     public PlayerManager player;
+    
+    // camera parameters
     public float sensitivity = 100f;
     public float clampAngle = 85f;
 
+    // rotation references
     private float verticalRotation;
     private float horizontalRotation;
 
+    /// <summary>
+    /// Set rotation values
+    /// </summary>
     private void Start()
     {
         verticalRotation = transform.localEulerAngles.x;
         horizontalRotation = player.transform.eulerAngles.y;
     }
 
+    /// <summary>
+    /// Update camera rotation, draw a ray from camera for debugging.
+    /// </summary>
     private void Update()
     {
         Look();
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
     }
 
+    /// <summary>
+    /// rotate camera based on player input.
+    /// </summary>
     private void Look()
     {
         float _mouseVertical = -Input.GetAxis("Mouse Y");

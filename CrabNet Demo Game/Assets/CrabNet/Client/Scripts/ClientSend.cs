@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class ClientSend : MonoBehaviour
 {
+    /// <summary>
+    /// Send data via TCP to server.
+    /// </summary>
+    /// <param name="_packet"></param>
     private static void SendTCPData(Packet _packet)
     {
         _packet.WriteLength();
         Client.instance.tcp.SendData(_packet);
     }
 
+    /// <summary>
+    /// Send data via UDP to server.
+    /// </summary>
+    /// <param name="_packet"></param>
     private static void SendUDPData(Packet _packet)
     {
         _packet.WriteLength();
@@ -17,6 +25,10 @@ public class ClientSend : MonoBehaviour
     }
 
     #region Packets
+
+    /// <summary>
+    /// Welcome received packet.
+    /// </summary>
     public static void WelcomeReceived()
     {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
@@ -28,6 +40,9 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Player movement for this client packet.
+    /// </summary>
     public static void PlayerMovement()
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
@@ -39,6 +54,9 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Player shoot for this client pakcet.
+    /// </summary>
     public static void PlayerShoot()
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
@@ -50,6 +68,11 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enemy damaged for enemy(id) from this client.
+    /// </summary>
+    /// <param name="_enemyId"></param>
+    /// <param name="_damage"></param>
     public static void EnemyDamaged(int _enemyId, float _damage)
     {
         using (Packet _packet = new Packet((int)ClientPackets.enemyDamaged))
