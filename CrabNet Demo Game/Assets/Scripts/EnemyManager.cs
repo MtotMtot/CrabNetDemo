@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyPrefab;
 
     // spawn points array reference.
-    public Transform[] spawnPoints;
+    public GameObject[] spawnPoints;
 
     public bool isHost = false;
 
@@ -31,6 +31,14 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
+        }
+    }
+
+    private void Start()
+    {
+        if (spawnPoints.Length == 0)
+        {
+            spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawn");
         }
     }
 
@@ -58,10 +66,10 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemies()
     {
         int i = 1;
-        foreach (Transform spawnPoint in spawnPoints)
+        foreach (GameObject spawnPoint in spawnPoints)
         {
             // spawn enemy at every spawn point and assign ID.
-            SpawnEnemy(i++, spawnPoint.position);
+            SpawnEnemy(i++, spawnPoint.transform.position);
         }
     }
 }

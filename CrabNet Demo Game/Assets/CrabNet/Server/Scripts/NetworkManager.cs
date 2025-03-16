@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
+    // instance reference
     public static NetworkManager instance;
 
+    // Server instance prefab reference
     public GameObject playerPrefab;
 
+    // isHost bool for enemyManager
     public bool isHost = false;
+    //playerSpawn list
+    public GameObject[] playerSpawns;
 
     // singleton network manager
     private void Awake()
@@ -21,6 +26,15 @@ public class NetworkManager : MonoBehaviour
         {
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
+        }
+    }
+
+    // find all player spawn points if not added to list manually
+    private void Start()
+    {
+        if (playerSpawns.Length == 0)
+        {
+            playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
         }
     }
 
@@ -42,6 +56,13 @@ public class NetworkManager : MonoBehaviour
     // instantiate player prefab
     public Player InstantiatePlayer()
     {
-        return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();
+        if(playerSpawns.Length == 0)
+        {
+            return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();
+        }
+        else
+        {
+            return Instantiate(playerPrefab, playerSpawns[Random.Range(0,playerSpawns.Length)].transform.position, Quaternion.identity).GetComponent<Player>();
+        }
     }
 }
