@@ -1,0 +1,34 @@
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\bin\Debug\GameServer.exe.config
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\bin\Debug\GameServer.exe
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\bin\Debug\GameServer.pdb
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\obj\Debug\GameServer.csproj.AssemblyReference.cache
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\obj\Debug\GameServer.exe
+C:\Users\loopa\Desktop\NET CODE RAW ;D\GameServer\GameServer\obj\Debug\GameServer.pdb
+G:\NET-CODE-RAW\GameServer\GameServer\obj\Debug\GameServer.csproj.AssemblyReference.cache
+G:\NET-CODE-RAW\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+G:\NET-CODE-RAW\GameServer\GameServer\obj\Debug\GameServer.exe
+G:\NET-CODE-RAW\GameServer\GameServer\obj\Debug\GameServer.pdb
+G:\NET-CODE-RAW\GameServer\GameServer\bin\Debug\GameServer.exe.config
+G:\NET-CODE-RAW\GameServer\GameServer\bin\Debug\GameServer.exe
+G:\NET-CODE-RAW\GameServer\GameServer\bin\Debug\GameServer.pdb
+G:\CrabNet\GameServer\GameServer\bin\Debug\GameServer.exe.config
+G:\CrabNet\GameServer\GameServer\bin\Debug\GameServer.exe
+G:\CrabNet\GameServer\GameServer\bin\Debug\GameServer.pdb
+G:\CrabNet\GameServer\GameServer\obj\Debug\GameServer.csproj.AssemblyReference.cache
+G:\CrabNet\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+G:\CrabNet\GameServer\GameServer\obj\Debug\GameServer.exe
+G:\CrabNet\GameServer\GameServer\obj\Debug\GameServer.pdb
+G:\CrabNet\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.dll
+G:\CrabNet\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.xml
+G:\CrabNet\GameServer\GameServer\obj\Debug\GameServer.csproj.Up2Date
+G:\CrabNetDemo\GameServer\GameServer\obj\Debug\GameServer.csproj.AssemblyReference.cache
+G:\CrabNetDemo\GameServer\GameServer\obj\Debug\GameServer.csproj.CoreCompileInputs.cache
+G:\CrabNetDemo\GameServer\GameServer\obj\Debug\GameServer.exe
+G:\CrabNetDemo\GameServer\GameServer\obj\Debug\GameServer.pdb
+G:\CrabNetDemo\GameServer\GameServer\bin\Debug\GameServer.exe.config
+G:\CrabNetDemo\GameServer\GameServer\bin\Debug\GameServer.exe
+G:\CrabNetDemo\GameServer\GameServer\bin\Debug\GameServer.pdb
+G:\CrabNetDemo\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.dll
+G:\CrabNetDemo\GameServer\GameServer\bin\Debug\System.Numerics.Vectors.xml
+G:\CrabNetDemo\GameServer\GameServer\obj\Debug\GameServer.csproj.Up2Date
