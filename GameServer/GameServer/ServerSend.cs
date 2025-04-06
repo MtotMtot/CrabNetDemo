@@ -69,6 +69,16 @@ namespace GameServer
                 SendTCPData(_toClient, _packet);
             }
         }
+
+        public static void Sector1Clear(int _toClient)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.Sector1Clear))
+            {
+                _packet.Write(_toClient);
+
+                SendTCPData(_toClient, _packet);
+            }
+        }
         #endregion
     }
 }

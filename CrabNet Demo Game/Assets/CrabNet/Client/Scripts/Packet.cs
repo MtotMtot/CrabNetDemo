@@ -29,6 +29,12 @@ public enum ClientPackets
     enemyDamaged,
 }
 
+/// <summary>Sent from LogicServer to HostServer.</summary>
+public enum LogicPackets
+{
+    Sector1State,
+}
+
 public class Packet : IDisposable
 {
     private List<byte> buffer;

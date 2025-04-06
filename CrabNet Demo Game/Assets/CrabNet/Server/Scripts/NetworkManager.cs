@@ -15,6 +15,9 @@ public class NetworkManager : MonoBehaviour
     //playerSpawn list
     public GameObject[] playerSpawns;
 
+    // logic manager prefab reference
+    public GameObject logicManagerPrefab;
+
     // singleton network manager
     private void Awake()
     {
@@ -36,6 +39,9 @@ public class NetworkManager : MonoBehaviour
         {
             playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
         }
+
+        // instantiate logic manager prefab if host
+        Instantiate(logicManagerPrefab);
     }
 
     // start server with target framrate, with (player count, port)

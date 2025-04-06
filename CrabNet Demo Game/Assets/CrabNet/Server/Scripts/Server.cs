@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Server
 {
+    // Host Server variables
     public static int MaxPlayers { get; private set; }
     public static int Port { get; private set; }
     public static Dictionary<int, ServerClient> serverClients = new Dictionary<int, ServerClient>();

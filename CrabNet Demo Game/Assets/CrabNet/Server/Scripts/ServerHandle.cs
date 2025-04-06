@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ServerHandle
 {
+    #region Client Packets
     /// <summary>
     /// Received welcome packet from client, send that client into game and initialize their data.
     /// </summary>
@@ -59,4 +60,16 @@ public class ServerHandle
         float _damage = _packet.ReadFloat();
         Server.serverClients[_fromClient].player.SetEnemyDamaged(_enemyId, _damage);
     }
+    #endregion
+
+    #region LogicServer Packets
+    /// <summary>
+    /// Receive sector 1 clear from LogicServer
+    /// </summary>
+    /// <param name="_packet"></param>
+    public static void Sector1Clear(Packet _packet)
+    {
+        LogicManager.instance.Sector1Clear = true;
+    }
+    #endregion
 }

@@ -73,7 +73,7 @@ public class ServerSend
     }
 
 
-    #region Packets
+    #region Host Server Packets
     /// <summary>Sends a welcome message to the given client.</summary>
     /// <param name="_toClient">The client to send the packet to.</param>
     /// <param name="_msg">The message to send.</param>
@@ -211,5 +211,21 @@ public class ServerSend
         }
     }
 
+    #endregion
+
+    #region LogicServer Packets
+    /// <summary>
+    /// Send sector 1 clear to LogicServer
+    /// </summary>
+    public static void Sector1State()
+    {
+        using (Packet _packet = new Packet((int)LogicPackets.Sector1State))
+        {
+            _packet.Write(LogicManager.instance.Sector1Clear);
+
+            _packet.WriteLength();
+            LogicClient.instance.udp.SendData(_packet);
+        }
+    }
     #endregion
 }
