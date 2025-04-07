@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        // if spawn points are not set, find all enemy spawns in the scene.
         if (spawnPoints.Length == 0)
         {
             spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawn");
@@ -79,6 +80,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
+        // activate all logic managers.
         foreach (GameObject logicManager in LogicManagers)
         {
             logicManager.SetActive(true);

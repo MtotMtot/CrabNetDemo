@@ -26,8 +26,9 @@ public class Sector1DoorLogic : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Starting Sector 1 Door Logic");
+        // Find all enemies in the scene.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // check layer of each enemy, if layer is 9 (relevant to game logic), add to active enemies.
         foreach (GameObject enemy in enemies)
         {
             if (enemy.layer == 9)

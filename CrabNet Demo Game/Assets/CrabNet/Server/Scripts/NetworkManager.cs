@@ -69,6 +69,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    // Instantiate the logic manager prefab.
     public void InstantiateLogicManager()
     {
         Instantiate(logicManagerPrefab);
