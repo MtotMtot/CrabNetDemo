@@ -5,8 +5,10 @@ namespace GameServer
 {
     class Program
     {
+        /// <summary>Whether the server is running.</summary>
         private static bool isRunning = false;
 
+        /// <summary>Main method.</summary>
         static void Main(string[] args)
         {
             Console.Title = "Game Server";
@@ -18,6 +20,7 @@ namespace GameServer
             Server.Start(50, 27000);
         }
 
+        /// <summary>Main thread.</summary>
         private static void MainThread()
         {
             Console.WriteLine($"Main thread started. Running at {Constants.TICKS_PER_SEC} ticks per second.");

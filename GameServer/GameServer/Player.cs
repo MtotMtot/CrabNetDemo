@@ -7,9 +7,10 @@ namespace GameServer
 {
     class Player
     {
+        /// <summary>The unique ID of the player.</summary>
         public int id;
+        /// <summary>The username of the player.</summary>
         public string username;
-
         public Player(int _id, string _username)
         {
             id = _id;
@@ -18,6 +19,7 @@ namespace GameServer
 
         public void Update()
         {
+            
         }
     }
 }

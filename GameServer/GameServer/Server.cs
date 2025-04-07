@@ -8,15 +8,25 @@ namespace GameServer
 {
     class Server
     {
+        /// <summary>The maximum number of players allowed on the server.</summary>
         public static int MaxPlayers { get; private set; }
+        /// <summary>The port number of the server.</summary>
         public static int Port { get; private set; }
+        /// <summary>A dictionary of clients connected to the server.</summary>
         public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
+        /// <summary>A delegate for handling packets.</summary>
         public delegate void PacketHandler(int _fromClient, Packet _packet);
+        /// <summary>A dictionary of packet handlers.</summary>
         public static Dictionary<int, PacketHandler> packetHandlers;
 
+        /// <summary>The TCP listener for the server.</summary>
         private static TcpListener tcpListener;
+        /// <summary>The UDP listener for the server.</summary>
         private static UdpClient udpListener;
 
+        /// <summary>Starts the server.</summary>
+        /// <param name="_maxPlayers">The maximum number of players allowed on the server.</param>
+        /// <param name="_port">The port number of the server.</param>
         public static void Start(int _maxPlayers, int _port)
         {
             MaxPlayers = _maxPlayers;
@@ -35,6 +45,8 @@ namespace GameServer
             Console.WriteLine($"Server started on port {Port}.");
         }
 
+        /// <summary>Callback for when a TCP connection is received.</summary>
+        /// <param name="_result">The result of the asynchronous operation.</param>
         private static void TCPConnectCallback(IAsyncResult _result)
         {
             TcpClient _client = tcpListener.EndAcceptTcpClient(_result);
@@ -53,6 +65,8 @@ namespace GameServer
             Console.WriteLine($"{_client.Client.RemoteEndPoint} failed to connect: Server full!");
         }
 
+        /// <summary>Callback for when a UDP packet is received.</summary>
+        /// <param name="_result">The result of the asynchronous operation.</param>
         private static void UDPReceiveCallback(IAsyncResult _result)
         {
             try
@@ -93,6 +107,9 @@ namespace GameServer
             }
         }
 
+        /// <summary>Sends a UDP packet to a client.</summary>
+        /// <param name="_clientEndPoint">The endpoint of the client to send the packet to.</param>
+        /// <param name="_packet">The packet to send.</param>
         public static void SendUDPData(IPEndPoint _clientEndPoint, Packet _packet)
         {
             try
@@ -108,6 +125,7 @@ namespace GameServer
             }
         }
 
+        /// <summary>Initializes the server data.</summary>
         private static void InitializeServerData()
         {
             for (int i = 1; i <= MaxPlayers; i++)

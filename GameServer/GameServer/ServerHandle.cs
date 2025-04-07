@@ -8,6 +8,9 @@ namespace GameServer
 {
     class ServerHandle
     {
+        /// <summary>Handles the welcome received packet.</summary>
+        /// <param name="_fromClient">The client ID of the sender.</param>
+        /// <param name="_packet">The packet containing the data.</param>
         public static void WelcomeReceived(int _fromClient, Packet _packet)
         {
             int _clientIdCheck = _packet.ReadInt();
@@ -20,6 +23,9 @@ namespace GameServer
             }
         }
 
+        /// <summary>Handles the sector 1 state packet.</summary>
+        /// <param name="_fromClient">The client ID of the sender.</param>
+        /// <param name="_packet">The packet containing the data.</param>
         public static void Sector1State(int _fromClient, Packet _packet)
         {
             bool Sector1State = _packet.ReadBool();
