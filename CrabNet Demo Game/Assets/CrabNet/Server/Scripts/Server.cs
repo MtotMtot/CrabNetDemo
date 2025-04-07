@@ -22,6 +22,7 @@ public class Server
     /// <param name="_port">The port to start the server on.</param>
     public static void Start(int _maxPlayers, int _port)
     {
+        // Host Server Start
         MaxPlayers = _maxPlayers;
         Port = _port;
 
@@ -38,6 +39,9 @@ public class Server
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
         Debug.Log($"Server started on port {Port}.");
+
+        // Logic Server connection
+        LogicClient.instance.ConnectToServer();
     }
 
     /// <summary>Handles new TCP connections.</summary>

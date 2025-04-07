@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LogicManager : MonoBehaviour
 {
-    [SerializeField]
-    private Sector1DoorLogic sector1DoorLogic;
-
     public static LogicManager instance;
 
     public bool Sector1Clear = false;
@@ -28,17 +25,23 @@ public class LogicManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        door1 = GameObject.FindWithTag("Sector1Door").GetComponent<DoorMove>();
+    }
+
     void Update()
     {
         if (Sector1Clear)
         {
-            // server send sector 1 clear to logic server
+            ServerSend.Sector1State(Sector1Clear);
         }
     }
 
     // open sector 1 door, called by logic server in server handle
     public void OpenSector1Door()
     {
+        Debug.Log("Opening sector 1 door");
         door1.OpenDoor();
     }
 }

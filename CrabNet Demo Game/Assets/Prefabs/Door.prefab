@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7323260071728805106}
   m_Layer: 6
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Sector1Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

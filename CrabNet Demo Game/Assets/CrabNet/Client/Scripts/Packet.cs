@@ -29,10 +29,18 @@ public enum ClientPackets
     enemyDamaged,
 }
 
-/// <summary>Sent from LogicServer to HostServer.</summary>
-public enum LogicPackets
+/// <summary>Sent from LogicClient to LogicServer.</summary>
+public enum LogicClientPackets
 {
+    welcomeReceived = 1,
     Sector1State,
+}
+
+/// <summary>Sent from LogicServer to LogicClient.</summary>
+public enum LogicServerPackets
+{
+    welcome = 1,
+    Sector1Clear,
 }
 
 public class Packet : IDisposable

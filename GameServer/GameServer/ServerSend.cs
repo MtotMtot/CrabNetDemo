@@ -74,7 +74,7 @@ namespace GameServer
         {
             using (Packet _packet = new Packet((int)ServerPackets.Sector1Clear))
             {
-                _packet.Write(_toClient);
+                //_packet.Write(_toClient);
 
                 SendTCPData(_toClient, _packet);
             }

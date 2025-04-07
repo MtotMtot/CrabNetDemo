@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - PlayerObj
+  - PlayerSpawn
+  - EnemySpawn
+  - Sector1Door
   layers:
   - Default
   - TransparentFX

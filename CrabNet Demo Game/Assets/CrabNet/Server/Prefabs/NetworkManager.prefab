@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4693e9532c2c5c8438cf1b69f92ef2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4187005777591049097, guid: 28356974c7337f046a4d87eaf2777d62, type: 3}
+  playerPrefab: {fileID: 4187005777591049097, guid: 28356974c7337f046a4d87eaf2777d62,
+    type: 3}
+  isHost: 0
+  playerSpawns: []
+  logicManagerPrefab: {fileID: 1167288142020568176, guid: f01ccf7751ba3ec45ae5b096d25bd84c,
+    type: 3}
 --- !u!114 &5607543337533509465
 MonoBehaviour:
   m_ObjectHideFlags: 0

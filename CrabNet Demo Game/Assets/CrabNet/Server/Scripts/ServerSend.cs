@@ -214,14 +214,29 @@ public class ServerSend
     #endregion
 
     #region LogicServer Packets
+
+    /// <summary>
+    /// Welcome received packet.
+    /// </summary>
+    public static void WelcomeReceived()
+    {
+        using (Packet _packet = new Packet((int)LogicClientPackets.welcomeReceived))
+        {
+            _packet.Write(LogicClient.instance.myId);
+            _packet.Write(UIManager.instance.usernameField.text);
+
+            LogicClient.instance.tcp.SendData(_packet);
+        }
+    }
+
     /// <summary>
     /// Send sector 1 clear to LogicServer
     /// </summary>
-    public static void Sector1State()
+    public static void Sector1State(bool _state)
     {
-        using (Packet _packet = new Packet((int)LogicPackets.Sector1State))
+        using (Packet _packet = new Packet((int)LogicClientPackets.Sector1State))
         {
-            _packet.Write(LogicManager.instance.Sector1Clear);
+            _packet.Write(_state);
 
             _packet.WriteLength();
             LogicClient.instance.udp.SendData(_packet);

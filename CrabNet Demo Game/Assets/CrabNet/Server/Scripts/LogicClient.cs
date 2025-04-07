@@ -108,6 +108,8 @@ public class LogicClient : MonoBehaviour
             receivedData = new Packet();
 
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+
+            Debug.Log("Connected to Logic server.");
         }
 
         /// <summary>
@@ -337,7 +339,8 @@ public class LogicClient : MonoBehaviour
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
-            { (int)LogicPackets.Sector1State, ServerHandle.Sector1Clear },
+            { (int)LogicServerPackets.welcome, ServerHandle.Welcome },
+            { (int)LogicServerPackets.Sector1Clear, ServerHandle.Sector1Clear },
         };
         Debug.Log("Initialized packets.");
     }

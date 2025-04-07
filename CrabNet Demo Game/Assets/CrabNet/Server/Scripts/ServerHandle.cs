@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class ServerHandle
@@ -63,13 +64,30 @@ public class ServerHandle
     #endregion
 
     #region LogicServer Packets
+
+    /// <summary>
+    /// Welcome packet received from LogicServer, send that LogicServer into game and initialize their data.
+    /// </summary>
+    /// <param name="_packet"></param>
+    public static void Welcome(Packet _packet)
+    {
+        string _msg = _packet.ReadString();
+        int _myId = _packet.ReadInt();
+
+        Debug.Log($"Message from Logic server: {_msg}");
+        LogicClient.instance.myId = _myId;
+        ServerSend.WelcomeReceived();
+
+        LogicClient.instance.udp.Connect(((IPEndPoint)LogicClient.instance.tcp.socket.Client.LocalEndPoint).Port);
+    }
+
     /// <summary>
     /// Receive sector 1 clear from LogicServer
     /// </summary>
     /// <param name="_packet"></param>
     public static void Sector1Clear(Packet _packet)
     {
-        LogicManager.instance.Sector1Clear = true;
+        LogicManager.instance.OpenSector1Door();
     }
     #endregion
 }
