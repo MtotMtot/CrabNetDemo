@@ -18,6 +18,8 @@ public class EnemyManager : MonoBehaviour
 
     public bool isHost = false;
 
+    public GameObject[] LogicManagers;
+
     /// <summary>
     /// Singleton this.
     /// </summary>
@@ -44,10 +46,10 @@ public class EnemyManager : MonoBehaviour
 
     /// <summary>
     /// Used by connected clients to spawn in all enemies from host.
-    /// </summary>
+     /// </summary>
     /// <param name="_id"></param>
     /// <param name="_spawnPos"></param>
-    public void SpawnEnemy(int _id, Vector3 _spawnPos)
+    public GameObject SpawnEnemy(int _id, Vector3 _spawnPos)
     {
         // if enemy id alrady exists in dictinoary, dont spawn
         if (!enemies.ContainsKey(_id))
@@ -56,12 +58,13 @@ public class EnemyManager : MonoBehaviour
             enemy.GetComponent<EnemyAI>().id = _id;
             enemy.GetComponent<EnemyAI>().isHost = isHost;
             enemies.Add(_id, enemy);
+            return enemy;
         }
-        
+        return null;
     }
 
     /// <summary>
-    /// Used by host to spawn all enemies initially.
+    /// Used by host to spawnall enemies initially.
     /// </summary>
     public void SpawnEnemies()
     {
@@ -69,7 +72,16 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject spawnPoint in spawnPoints)
         {
             // spawn enemy at every spawn point and assign ID.
-            SpawnEnemy(i++, spawnPoint.transform.position);
+            GameObject enemy = SpawnEnemy(i++, spawnPoint.transform.position);
+            if (enemy != null)
+            {
+                enemy.layer = spawnPoint.layer;
+            }
+        }
+
+        foreach (GameObject logicManager in LogicManagers)
+        {
+            logicManager.SetActive(true);
         }
     }
 }

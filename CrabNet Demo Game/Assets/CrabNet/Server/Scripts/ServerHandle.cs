@@ -92,8 +92,6 @@ public class ServerHandle
     {
         int _myId = _packet.ReadInt();
 
-        Debug.Log("Sector 1 clear received from LogicServer");
-
         LogicManager.instance.OpenSector1Door();
         LogicManager.instance.Sector1Clear = false;
     }

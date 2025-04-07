@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Sector1DoorLogic : MonoBehaviour
 {
+    //HashSet of active enemies.
     public HashSet<GameObject> activeEnemies = new HashSet<GameObject>();
 
+    //Instance reference of the door logic object.
     public static Sector1DoorLogic instance;
 
+    //Instance of the door logic object.
     private void Awake()
     {
         if (instance == null)
@@ -21,48 +24,36 @@ public class Sector1DoorLogic : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Debug.Log("Starting Sector 1 Door Logic");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy.layer == 9)
+            {
+                activeEnemies.Add(enemy);
+            }
+        }
+    }
+
+    //Used to destroy the door logic object to stop the logic manager from checking for enemies.
     public void DestroySelf()
     {
         Destroy(gameObject);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Check if any previously tracked enemies are no longer active
+
         activeEnemies.RemoveWhere(enemy => enemy == null || !enemy.activeInHierarchy);
 
+        // if hashset is empty and logic manager exists, set sector 1 clear to true.
         if (activeEnemies.Count == 0 && LogicManager.instance != null)
         {
             LogicManager.instance.Sector1Clear = true;
         }
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("enemy entered collider");
-    }
-    void OnCollisionStay(Collision collision)
-    {
-        Debug.Log("enemy stay in collider");
-        // Check if the colliding object is an enemy
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            if (activeEnemies.Contains(collision.gameObject))
-            {
-                return;
-            }
-            activeEnemies.Add(collision.gameObject);
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        Debug.Log("enemy exit collider");
-        // Remove enemy when it exits the collision zone
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            activeEnemies.Remove(collision.gameObject);
-        }
-    }    
 }
