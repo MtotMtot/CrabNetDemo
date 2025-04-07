@@ -225,6 +225,7 @@ public class ServerSend
             _packet.Write(LogicClient.instance.myId);
             _packet.Write(UIManager.instance.usernameField.text);
 
+            _packet.WriteLength();
             LogicClient.instance.tcp.SendData(_packet);
         }
     }

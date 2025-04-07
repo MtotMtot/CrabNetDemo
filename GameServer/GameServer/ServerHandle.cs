@@ -23,6 +23,8 @@ namespace GameServer
         public static void Sector1State(int _fromClient, Packet _packet)
         {
             bool Sector1State = _packet.ReadBool();
+
+            Console.WriteLine($"Received Sector1state from host : {Sector1State}");
             if (Sector1State)
             {
                 ServerSend.Sector1Clear(_fromClient);

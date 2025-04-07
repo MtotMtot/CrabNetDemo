@@ -6,10 +6,24 @@ public class Sector1DoorLogic : MonoBehaviour
 {
     public HashSet<GameObject> activeEnemies = new HashSet<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
+    public static Sector1DoorLogic instance;
+
+    private void Awake()
     {
-        Debug.Log("sector 1 door logic start");
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -18,7 +32,7 @@ public class Sector1DoorLogic : MonoBehaviour
         // Check if any previously tracked enemies are no longer active
         activeEnemies.RemoveWhere(enemy => enemy == null || !enemy.activeInHierarchy);
 
-        if (activeEnemies.Count == 0 && NetworkManager.instance.isHost)
+        if (activeEnemies.Count == 0 && LogicManager.instance != null)
         {
             LogicManager.instance.Sector1Clear = true;
         }

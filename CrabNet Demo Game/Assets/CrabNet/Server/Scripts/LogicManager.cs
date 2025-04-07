@@ -35,6 +35,7 @@ public class LogicManager : MonoBehaviour
         if (Sector1Clear)
         {
             ServerSend.Sector1State(Sector1Clear);
+            Debug.Log("Sector 1 clear Sent To Logic Server");
         }
     }
 
@@ -42,6 +43,9 @@ public class LogicManager : MonoBehaviour
     public void OpenSector1Door()
     {
         Debug.Log("Opening sector 1 door");
+
+        Sector1DoorLogic.instance.DestroySelf();
         door1.OpenDoor();
+
     }
 }

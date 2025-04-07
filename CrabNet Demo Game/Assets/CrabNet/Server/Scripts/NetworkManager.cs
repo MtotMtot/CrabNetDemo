@@ -39,9 +39,6 @@ public class NetworkManager : MonoBehaviour
         {
             playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
         }
-
-        // instantiate logic manager prefab if host
-        Instantiate(logicManagerPrefab);
     }
 
     // start server with target framrate, with (player count, port)
@@ -70,5 +67,10 @@ public class NetworkManager : MonoBehaviour
         {
             return Instantiate(playerPrefab, playerSpawns[Random.Range(0,playerSpawns.Length)].transform.position, Quaternion.identity).GetComponent<Player>();
         }
+    }
+
+    public void InstantiateLogicManager()
+    {
+        Instantiate(logicManagerPrefab);
     }
 }

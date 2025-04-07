@@ -79,6 +79,9 @@ public class ServerHandle
         ServerSend.WelcomeReceived();
 
         LogicClient.instance.udp.Connect(((IPEndPoint)LogicClient.instance.tcp.socket.Client.LocalEndPoint).Port);
+
+        // instantiate logic manager prefab on successful connection to logic server
+        NetworkManager.instance.InstantiateLogicManager();
     }
 
     /// <summary>
@@ -87,7 +90,12 @@ public class ServerHandle
     /// <param name="_packet"></param>
     public static void Sector1Clear(Packet _packet)
     {
+        int _myId = _packet.ReadInt();
+
+        Debug.Log("Sector 1 clear received from LogicServer");
+
         LogicManager.instance.OpenSector1Door();
+        LogicManager.instance.Sector1Clear = false;
     }
     #endregion
 }
