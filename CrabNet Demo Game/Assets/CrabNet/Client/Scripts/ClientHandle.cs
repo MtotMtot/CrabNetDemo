@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using CrabNet.RPC;
 
 public class ClientHandle : MonoBehaviour
 {
@@ -138,5 +139,17 @@ public class ClientHandle : MonoBehaviour
         int _enemyId = _packet.ReadInt();
         Vector3 _spawnPos = _packet.ReadVector3();
         EnemyManager.instance.SpawnEnemy(_enemyId, _spawnPos);
+    }
+
+    public static void RPC(Packet _packet)
+    {
+        try
+        {
+            RpcRegistry.HandleRpcPacket(_packet);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error handling RPC: {e.Message}");
+        }
     }
 }

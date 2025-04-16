@@ -267,10 +267,21 @@ public class Client : MonoBehaviour
             }
             catch (Exception _ex)
             {
-                Debug.Log($"Error sending data to server via UDP: {_ex}");
+                Debug.Log($"Error sending Packet data to server via UDP: {_ex}");
             }
         }
 
+        public void SendData(byte[] data)
+        {
+            try
+            {
+                socket.BeginSend(data, data.Length, null, null);
+            }
+            catch (Exception _ex)
+            {
+                Debug.Log($"Error sending RPC data to server via UDP: {_ex}");
+            }
+        }
         /// <summary>
         /// Receive call back from target endpoint, if length < 4 or fail to receive data: connection closed -> disconnect.
         /// </summary>
@@ -302,6 +313,7 @@ public class Client : MonoBehaviour
         /// <param name="_data"></param>
         private void HandleData(byte[] _data)
         {
+            
             using (Packet _packet = new Packet(_data))
             {
                 int _packetLength = _packet.ReadInt();
@@ -348,6 +360,7 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.enemyPosition, ClientHandle.EnemyPosition },
             { (int)ServerPackets.enemyRotation, ClientHandle.EnemyRotation },
             { (int)ServerPackets.spawnEnemy, ClientHandle.SpawnEnemy },
+            { (int)ServerPackets.rpc, ClientHandle.RPC },
         };
         Debug.Log("Initialized packets.");
     }

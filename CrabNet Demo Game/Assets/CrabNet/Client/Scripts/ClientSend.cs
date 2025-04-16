@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CrabNet.RPC;
 
 public class ClientSend : MonoBehaviour
 {
@@ -79,6 +80,48 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(_enemyId);
             _packet.Write(_damage);
+            SendUDPData(_packet);
+        }
+    }
+
+    public static void SendRPC(int targetId, string methodName, params object[] parameters)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.rpc))
+        {
+            _packet.Write(targetId);
+            _packet.Write(methodName);
+            _packet.Write(parameters.Length);
+
+            foreach (object param in parameters)
+            {
+                RpcRegistry.WriteParameter(_packet, param);
+            }
+
+            if (RpcRegistry.IsMethodReliable(targetId, methodName))
+            {
+                SendTCPData(_packet);
+            }
+            else
+            {
+                SendUDPData(_packet);
+            }
+        }
+    }
+
+    public static void SendUnreliableRPC(int targetId, string rpcId, params object[] parameters)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.rpc))
+        {
+            // Write the target object ID
+            _packet.Write(targetId);
+
+            // Serialize the RPC data
+            byte[] rpcData = RpcMessageHandler.SerializeRpcMessage(rpcId, parameters);
+            
+            // Write the RPC data length and the data itself
+            _packet.Write(rpcData.Length);
+            _packet.Write(rpcData);
+
             SendUDPData(_packet);
         }
     }
