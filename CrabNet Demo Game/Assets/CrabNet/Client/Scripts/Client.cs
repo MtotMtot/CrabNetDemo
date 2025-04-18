@@ -356,7 +356,7 @@ public class Client : MonoBehaviour
     /// <summary>
     /// Disconect for this client, close UDP and TCP clients.
     /// </summary>
-    private void Disconnect()
+    public void Disconnect()
     {
         if (isConnected)
         {
@@ -364,6 +364,9 @@ public class Client : MonoBehaviour
             tcp.socket.Close();
             udp.socket.Close();
 
+            EnemyManager.enemies = new Dictionary<int, GameObject>();
+            GameManager.players = new Dictionary<int, PlayerManager>();
+            
             Debug.Log("Disconnected from server.");
         }
     }

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     // start menu and input field reference.
     public GameObject startMenu;
+    public GameObject pauseMenu;
     public InputField usernameField;
 
     /// <summary>
@@ -21,12 +24,20 @@ public class UIManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
         }
         else if (instance != this)
         {
             Debug.Log("Instance already exists, destroying object");
             Destroy(this);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+            ChangedCursor();
         }
     }
 
@@ -58,5 +69,45 @@ public class UIManager : MonoBehaviour
         // connect to server (this client)
         Client.instance.ConnectToServer();
 
+    }
+
+    public void LeaveServer()
+    {   
+        // Properly Handle Disconnecting and Stopping Server.
+        Client.instance.Disconnect();
+        // Stop the server. Try and catch to handle any errors (if the client is not host
+        try
+        {
+            Server.Stop();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error stopping server: " + e.Message);
+        }
+        ChangedCursor();
+
+        // Reload the current scene to reset.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Resume()
+    {
+        // disable pauseMenu
+        pauseMenu.SetActive(false);
+        ChangedCursor();
+    }
+
+    private void ChangedCursor()
+    {
+        if (pauseMenu.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

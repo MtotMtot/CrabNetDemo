@@ -35,8 +35,8 @@ public class Player : MonoBehaviour
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            Debug.Log("Sent spawn enemy");
             ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+            Debug.Log("Sent spawn enemy");
         }
     }
 

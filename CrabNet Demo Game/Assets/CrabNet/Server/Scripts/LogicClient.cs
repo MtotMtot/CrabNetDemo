@@ -348,7 +348,7 @@ public class LogicClient : MonoBehaviour
     /// <summary>
     /// Disconect for this client, close UDP and TCP clients.
     /// </summary>
-    private void Disconnect()
+    public void Disconnect()
     {
         if (isConnected)
         {

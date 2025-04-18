@@ -151,5 +151,7 @@ public class Server
     {
         tcpListener.Stop();
         udpListener.Close();
+
+        serverClients = new Dictionary<int, ServerClient>();
     }
 }
