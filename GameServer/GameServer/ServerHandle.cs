@@ -36,5 +36,19 @@ namespace GameServer
                 ServerSend.Sector1Clear(_fromClient);
             }
         }
+
+        /// <summary>Handles the sector 2 state packet.</summary>
+        /// <param name="_fromClient">The client ID of the sender.</param>
+        /// <param name="_packet">The packet containing the data.</param>
+        public static void Sector2State(int _fromClient, Packet _packet)
+        {
+            bool Sector2State = _packet.ReadBool();
+
+            Console.WriteLine($"Received Sector2state from host : {Sector2State}");
+            if (Sector2State)
+            {
+                ServerSend.Sector2Clear(_fromClient);
+            }
+        }
     }
 }

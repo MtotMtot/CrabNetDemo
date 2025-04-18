@@ -18,6 +18,7 @@ public enum ServerPackets
     enemyPosition,
     enemyRotation,
     spawnEnemy,
+    spawnBoss,
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -34,6 +35,7 @@ public enum LogicClientPackets
 {
     welcomeReceived = 1,
     Sector1State,
+    Sector2State,
 }
 
 /// <summary>Sent from LogicServer to LogicClient.</summary>
@@ -41,6 +43,7 @@ public enum LogicServerPackets
 {
     welcome = 1,
     Sector1Clear,
+    Sector2Clear,
 }
 
 public class Packet : IDisposable

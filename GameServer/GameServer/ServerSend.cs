@@ -102,6 +102,18 @@ namespace GameServer
                 SendTCPData(_toClient, _packet);
             }
         }
+
+        /// <summary>Sends a sector 2 clear packet to a client.</summary>
+        /// <param name="_toClient">The client ID of the recipient.</param>
+        public static void Sector2Clear(int _toClient)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.Sector2Clear))
+            {
+                _packet.Write(_toClient);
+
+                SendTCPData(_toClient, _packet);
+            }
+        }
         #endregion
     }
 }

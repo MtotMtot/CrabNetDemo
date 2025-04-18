@@ -341,6 +341,7 @@ public class LogicClient : MonoBehaviour
         {
             { (int)LogicServerPackets.welcome, ServerHandle.Welcome },
             { (int)LogicServerPackets.Sector1Clear, ServerHandle.Sector1Clear },
+            { (int)LogicServerPackets.Sector2Clear, ServerHandle.Sector2Clear },
         };
         Debug.Log("Initialized packets.");
     }

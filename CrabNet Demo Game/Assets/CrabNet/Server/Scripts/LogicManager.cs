@@ -7,12 +7,17 @@ public class LogicManager : MonoBehaviour
     //  Instance of the logic manager variable.
     public static LogicManager instance;
 
-    // sector 1 is clear bool variable.
+    // sector 1 and 2 clear bool.
     public bool Sector1Clear = false;
+    public bool Sector2Clear = false;
 
     // The sector 1 door.
     [SerializeField]
     private DoorMove door1;
+
+    // The sector 2 door.
+    [SerializeField]
+    private DoorMove door2;
 
     // instance logic manager
     private void Awake()
@@ -32,6 +37,7 @@ public class LogicManager : MonoBehaviour
     private void Start()
     {
         door1 = GameObject.FindWithTag("Sector1Door").GetComponent<DoorMove>();
+        door2 = GameObject.FindWithTag("Sector2Door").GetComponent<DoorMove>();
     }
 
     void Update()
@@ -40,6 +46,10 @@ public class LogicManager : MonoBehaviour
         if (Sector1Clear)
         {
             ServerSend.Sector1State(Sector1Clear);
+        }
+        if (Sector2Clear)
+        {
+            ServerSend.Sector2State(Sector2Clear);
         }
     }
 
@@ -50,5 +60,12 @@ public class LogicManager : MonoBehaviour
         Sector1DoorLogic.instance.DestroySelf();
         door1.OpenDoor();
 
+    }
+
+    // open sector 2 door, called by logic server in server handle
+    public void OpenSector2Door()
+    {
+        Sector2DoorLogic.instance.DestroySelf();
+        door2.OpenDoor();
     }
 }

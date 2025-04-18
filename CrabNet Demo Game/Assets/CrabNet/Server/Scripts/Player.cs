@@ -38,6 +38,10 @@ public class Player : MonoBehaviour
             ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
             Debug.Log("Sent spawn enemy");
         }
+
+        // Send boss to new client
+        ServerSend.SpawnBoss(id, EnemyManager.boss.GetComponent<EnemyAI>().id, EnemyManager.boss.transform.position);
+        Debug.Log("Sent spawn boss");
     }
 
     /// <summary>Processes player input and moves the player.</summary>

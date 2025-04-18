@@ -230,6 +230,16 @@ public class ServerSend
         }
     }
 
+    public static void SpawnBoss(int _playerId, int _id, Vector3 _spawnPos)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.spawnBoss))
+        {
+            _packet.Write(_id);
+            _packet.Write(_spawnPos);
+            SendTCPData(_playerId, _packet);
+        }
+    }
+
     #endregion
 
     #region LogicServer Packets
@@ -258,6 +268,21 @@ public class ServerSend
     public static void Sector1State(bool _state)
     {
         using (Packet _packet = new Packet((int)LogicClientPackets.Sector1State))
+        {
+            _packet.Write(_state);
+
+            _packet.WriteLength();
+            LogicClient.instance.udp.SendData(_packet);
+        }
+    }
+
+    /// <summary>
+    /// Send sector 2 clear to LogicServer
+    /// </summary>
+    /// <param name="_state">The state of the sector 2.</param>
+    public static void Sector2State(bool _state)
+    {
+        using (Packet _packet = new Packet((int)LogicClientPackets.Sector2State))
         {
             _packet.Write(_state);
 

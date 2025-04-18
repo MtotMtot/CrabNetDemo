@@ -7,11 +7,16 @@ public class EnemyManager : MonoBehaviour
     //enemy distioanry reference
     public static Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
+    public static GameObject boss;
+
     // instance reference.
     public static EnemyManager instance;
 
     // enemy prefab reference
     public GameObject enemyPrefab;
+
+    // boss prefab reference
+    public GameObject bossPrefab;
 
     // spawn points array reference.
     public GameObject[] spawnPoints;
@@ -64,6 +69,14 @@ public class EnemyManager : MonoBehaviour
         return null;
     }
 
+    public GameObject SpawnBoss(int _id, Vector3 _spawnPos)
+    {
+        boss = Instantiate(bossPrefab, _spawnPos, Quaternion.identity);
+        boss.GetComponent<EnemyAI>().id = enemies.Count + 1;
+        boss.GetComponent<EnemyAI>().isHost = isHost;
+        return boss;
+    }
+
     /// <summary>
     /// Used by host to spawnall enemies initially.
     /// </summary>
@@ -79,6 +92,8 @@ public class EnemyManager : MonoBehaviour
                 enemy.layer = spawnPoint.layer;
             }
         }
+
+        SpawnBoss(enemies.Count + 1, GameObject.FindWithTag("BossSpawn").transform.position);
 
         // activate all logic managers.
         foreach (GameObject logicManager in LogicManagers)

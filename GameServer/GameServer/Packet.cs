@@ -10,6 +10,7 @@ namespace GameServer
     {
         welcome = 1,
         Sector1Clear,
+        Sector2Clear,
     }
 
     /// <summary>Sent from client to server.</summary>
@@ -17,6 +18,7 @@ namespace GameServer
     {
         welcomeReceived = 1,
         Sector1State,
+        Sector2State,
     }
 
     public class Packet : IDisposable

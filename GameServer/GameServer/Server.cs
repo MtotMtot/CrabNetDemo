@@ -137,6 +137,7 @@ namespace GameServer
             {
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
                 { (int)ClientPackets.Sector1State, ServerHandle.Sector1State },
+                { (int)ClientPackets.Sector2State, ServerHandle.Sector2State },
             };
             Console.WriteLine("Initialized packets.");
         }

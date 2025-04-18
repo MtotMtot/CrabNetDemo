@@ -94,6 +94,18 @@ public class ServerHandle
 
         LogicManager.instance.OpenSector1Door();
         LogicManager.instance.Sector1Clear = false;
+
+        Debug.Log("Opened sector 1 door");
+    }
+
+    public static void Sector2Clear(Packet _packet)
+    {
+        int _myId = _packet.ReadInt();
+
+        LogicManager.instance.OpenSector2Door();
+        LogicManager.instance.Sector2Clear = false;
+
+        Debug.Log("Opened sector 2 door");
     }
     #endregion
 }
