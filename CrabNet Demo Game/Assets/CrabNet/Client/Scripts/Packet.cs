@@ -18,7 +18,6 @@ public enum ServerPackets
     enemyPosition,
     enemyRotation,
     spawnEnemy,
-    rpc,
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -28,7 +27,6 @@ public enum ClientPackets
     playerMovement,
     playerShoot,
     enemyDamaged,
-    rpc,
 }
 
 /// <summary>Sent from LogicClient to LogicServer.</summary>
