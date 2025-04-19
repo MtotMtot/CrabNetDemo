@@ -35,13 +35,17 @@ public class Player : MonoBehaviour
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
-            Debug.Log("Sent spawn enemy");
+            if (enemy.GetComponent<EnemyAI>().agent.name == "Enemy")
+            {
+                ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+                Debug.Log("Sent spawn enemy");
+            }
+            else if (enemy.GetComponent<EnemyAI>().agent.name == "Boss")
+            {
+                ServerSend.SpawnBoss(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+                Debug.Log("Sent spawn boss");
+            }
         }
-
-        // Send boss to new client
-        ServerSend.SpawnBoss(id, EnemyManager.boss.GetComponent<EnemyAI>().id, EnemyManager.boss.transform.position);
-        Debug.Log("Sent spawn boss");
     }
 
     /// <summary>Processes player input and moves the player.</summary>

@@ -277,6 +277,7 @@ MonoBehaviour:
     m_Bits: 128
   health: 500
   walkPoint: {x: 0, y: 0, z: 0}
+  enemyHeight: 9.38673
   walkPointRange: 3
   timeBetweenAttacks: 1
   projectile: {fileID: 5551174811030083668, guid: df9bae7819561924e983da2f0e186034,

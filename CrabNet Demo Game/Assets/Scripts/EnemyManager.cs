@@ -69,12 +69,22 @@ public class EnemyManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Spawns the boss enemy.
+    /// </summary>
+    /// <param name="_id">The ID of the boss.</param>
+    /// <param name="_spawnPos">The position to spawn the boss.</param>
+    /// <returns>The spawned boss game object.</returns>
     public GameObject SpawnBoss(int _id, Vector3 _spawnPos)
     {
-        boss = Instantiate(bossPrefab, _spawnPos, Quaternion.identity);
-        boss.GetComponent<EnemyAI>().id = enemies.Count + 1;
-        boss.GetComponent<EnemyAI>().isHost = isHost;
-        return boss;
+        if (!enemies.ContainsKey(_id))
+        {
+            boss = Instantiate(bossPrefab, _spawnPos, Quaternion.identity);
+            boss.GetComponent<EnemyAI>().id = enemies.Count + 1;
+            boss.GetComponent<EnemyAI>().isHost = isHost;
+            return boss;
+        }
+        return null;
     }
 
     /// <summary>
@@ -92,7 +102,6 @@ public class EnemyManager : MonoBehaviour
                 enemy.layer = spawnPoint.layer;
             }
         }
-
         SpawnBoss(enemies.Count + 1, GameObject.FindWithTag("BossSpawn").transform.position);
 
         // activate all logic managers.

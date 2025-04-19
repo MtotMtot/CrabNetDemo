@@ -46,4 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2551260405537844161, guid: e0e5c7f62f04dce43a5b6bfaffe76b01,
     type: 3}
+  bossPrefab: {fileID: 2551260405537844161, guid: 3c4ab2d169ffea741bfdd6b58efe0772,
+    type: 3}
   spawnPoints: []
+  isHost: 0
+  LogicManagers: []

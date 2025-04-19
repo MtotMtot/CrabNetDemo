@@ -29,6 +29,8 @@ public class EnemyAI : MonoBehaviour
     // Patroling reference.
     public Vector3 walkPoint;
     bool walkPointSet;
+    [SerializeField]
+    float enemyHeight;
     public float walkPointRange;
     private float walkTimeOut;
 
@@ -115,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         // check if walkpoint is on ground.
-        if ( Physics.Raycast(walkPoint, -transform.up, 1.8f, whatIsGround) )
+        if ( Physics.Raycast(walkPoint, -transform.up, enemyHeight, whatIsGround) )
         {
             walkPointSet = true;
             walkTimeOut = 5f;

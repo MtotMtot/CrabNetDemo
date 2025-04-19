@@ -142,7 +142,7 @@ public class ClientHandle : MonoBehaviour
 
     public static void SpawnBoss(Packet _packet)
     {
-        Debug.Log("Received spawn enemy packet from Server");
+        Debug.Log("Received spawn Boss packet from Server");
         int _enemyId = _packet.ReadInt();
         Vector3 _spawnPos = _packet.ReadVector3();
         EnemyManager.instance.SpawnBoss(_enemyId, _spawnPos);

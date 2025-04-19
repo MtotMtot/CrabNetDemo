@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject startMenu;
     public GameObject pauseMenu;
     public InputField usernameField;
+    public InputField ipField;
 
     /// <summary>
     /// Singleton this.
@@ -50,6 +51,7 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
         usernameField.interactable = false;
         Client.instance.ConnectToServer();
+        Client.instance.ip = ipField.text;
     }
 
     public void HostServer()

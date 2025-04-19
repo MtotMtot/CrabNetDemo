@@ -9,6 +9,8 @@ TagManager:
   - PlayerSpawn
   - EnemySpawn
   - Sector1Door
+  - Sector2Door
+  - BossSpawn
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Player
   - 
   - Sector1Logic
-  - 
+  - Sector2Logic
   - 
   - 
   - 
