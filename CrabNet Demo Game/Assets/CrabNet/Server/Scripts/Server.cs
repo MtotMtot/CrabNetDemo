@@ -68,7 +68,6 @@ public class Server
     /// <summary>Receives incoming UDP data.</summary>
     private static void UDPReceiveCallback(IAsyncResult _result)
     {
-        Debug.Log("Receiving UDP connetion...");
         try
         {
             IPEndPoint _ServerClientEndPoint = new IPEndPoint(IPAddress.Any, 0);
