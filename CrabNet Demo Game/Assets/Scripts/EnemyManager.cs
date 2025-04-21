@@ -7,8 +7,6 @@ public class EnemyManager : MonoBehaviour
     //enemy distioanry reference
     public static Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 
-    public static GameObject boss;
-
     // instance reference.
     public static EnemyManager instance;
 
@@ -79,9 +77,10 @@ public class EnemyManager : MonoBehaviour
     {
         if (!enemies.ContainsKey(_id))
         {
-            boss = Instantiate(bossPrefab, _spawnPos, Quaternion.identity);
+            GameObject boss = Instantiate(bossPrefab, _spawnPos, Quaternion.identity);
             boss.GetComponent<EnemyAI>().id = enemies.Count + 1;
             boss.GetComponent<EnemyAI>().isHost = isHost;
+            enemies.Add(_id, boss);
             return boss;
         }
         return null;
