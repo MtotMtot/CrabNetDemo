@@ -10,7 +10,7 @@ public class Client : MonoBehaviour
     public static Client instance;
     public static int dataBufferSize = 4096;
 
-    public string ip = "193.60.167.159";
+    public string ip = "127.0.0.1";
     public int port = 26950;
     public int myId = 0;
     public TCP tcp;
@@ -372,7 +372,7 @@ public class Client : MonoBehaviour
             EnemyManager.enemies = new Dictionary<int, GameObject>();
             GameManager.players = new Dictionary<int, PlayerManager>();
             
-            Debug.Log("Disconnected from server.");
+            Debug.Log($"Disconnected from server. IP WAS: {ip}");
         }
     }
 }
