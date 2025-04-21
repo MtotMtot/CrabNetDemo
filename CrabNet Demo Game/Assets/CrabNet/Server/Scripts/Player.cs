@@ -38,12 +38,12 @@ public class Player : MonoBehaviour
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            if (enemy.GetComponent<EnemyAI>().agent.name == "Enemy")
+            if (enemy.layer == 9 || enemy.layer == 10 || enemy.layer == 11)
             {
                 ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
                 Debug.Log($"Sent spawn enemy {enemy.GetComponent<EnemyAI>().id}");
             }
-            else if (enemy.GetComponent<EnemyAI>().agent.name == "Boss")
+            else if (enemy.layer == 12)
             {
                 ServerSend.SpawnBoss(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
                 Debug.Log("Sent spawn boss");

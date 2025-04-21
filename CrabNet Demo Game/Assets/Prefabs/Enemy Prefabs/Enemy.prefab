@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 865407987177536114}
   - component: {fileID: 3458866923404073791}
   - component: {fileID: 1052750796902852558}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7701201745816099746}
   - component: {fileID: 5366773440508054299}
   - component: {fileID: 1277609824464744754}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 1683906226656538150}
   - component: {fileID: 7652645743064610044}
   - component: {fileID: 6894132424903480715}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 6688796042356365107}
   - component: {fileID: 3365329359373117397}
   - component: {fileID: 2211394369124202140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

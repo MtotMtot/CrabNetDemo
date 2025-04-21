@@ -245,7 +245,6 @@ public class Client : MonoBehaviour
 
             socket.Connect(endPoint);
             socket.BeginReceive(ReceiveCallback, null);
-            Debug.Log("Begin receiving UDP callback");
 
             using (Packet _packet = new Packet())
             {
