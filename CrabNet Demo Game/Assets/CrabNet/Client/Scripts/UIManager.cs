@@ -48,10 +48,10 @@ public class UIManager : MonoBehaviour
     public void ConnectToServer()   
     {
         // set menu to inactive, connect to server
+        Client.instance.ip = ipField.text;
         startMenu.SetActive(false);
         usernameField.interactable = false;
         Client.instance.ConnectToServer();
-        Client.instance.ip = ipField.text;
     }
 
     public void HostServer()
