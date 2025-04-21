@@ -42,6 +42,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SetIP()
+    {
+        Debug.Log(ipField.text.ToString());
+        Client.instance.SetIP(ipField.text.ToString());
+    }
+
     /// <summary>
     /// disables UI and connects to target IP (server).
     /// </summary>

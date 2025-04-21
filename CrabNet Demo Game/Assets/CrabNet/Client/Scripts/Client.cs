@@ -39,6 +39,8 @@ public class Client : MonoBehaviour
     public void SetIP(string _ip)
     {
         ip = _ip;
+        tcp = new TCP();
+        udp = new UDP();
     }
 
     /// <summary>
