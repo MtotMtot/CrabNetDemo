@@ -265,7 +265,6 @@ public class Client : MonoBehaviour
                 if (socket != null)
                 {
                     socket.BeginSend(_packet.ToArray(), _packet.Length(), null, null);
-                    Debug.Log("Sending UDP packet");
                 }
             }
             catch (Exception _ex)

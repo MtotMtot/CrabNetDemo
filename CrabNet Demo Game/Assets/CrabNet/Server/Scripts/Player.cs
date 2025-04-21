@@ -39,10 +39,11 @@ public class Player : MonoBehaviour
         {
             // Send all enemies to new client
             ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
-            Debug.Log("Sent spawn enemy");
+            Debug.Log($"Sent spawn enemy, id: {enemy.GetComponent<EnemyAI>().id}");
 
-            Debug.Log("iterated once through spawn enemies loop");
+            Debug.Log("iteration of enemy loop");
         }
+        Debug.Log("Sent all spawn enemies");
     }
 
     /// <summary>Processes player input and moves the player.</summary>
