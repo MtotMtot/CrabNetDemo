@@ -59,6 +59,7 @@ public class NetworkManager : MonoBehaviour
     // instantiate player prefab
     public Player InstantiatePlayer()
     {
+        Debug.Log("Spawning Player...");
         if(playerSpawns.Length == 0)
         {
             return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();

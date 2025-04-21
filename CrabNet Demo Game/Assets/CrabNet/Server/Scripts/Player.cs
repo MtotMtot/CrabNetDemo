@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
         {
             capsuleCollider.enabled = false;
         }
+
+        Debug.Log("Player Spawned!");
     }
 
     /// <summary>
@@ -32,19 +34,14 @@ public class Player : MonoBehaviour
         id = _id;
         username = _username;
 
+        Debug.Log("Starting: send spawn Enemies...");
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            if (enemy.GetComponent<EnemyAI>().agent.name == "Enemy")
-            {
-                ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
-                Debug.Log("Sent spawn enemy");
-            }
-            else if (enemy.GetComponent<EnemyAI>().agent.name == "Boss")
-            {
-                ServerSend.SpawnBoss(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
-                Debug.Log("Sent spawn boss");
-            }
+            ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+            Debug.Log("Sent spawn enemy");
+
+            Debug.Log("iterated once through spawn enemies loop");
         }
     }
 

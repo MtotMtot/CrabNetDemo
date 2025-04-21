@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerSend
+public class ServerSend : MonoBehaviour
 {
     /// <summary>Sends a packet to a client via TCP.</summary>
     /// <param name="_toClient">The client to send the packet the packet to.</param>
@@ -101,6 +101,8 @@ public class ServerSend
             _packet.Write(_player.transform.rotation);
 
             SendTCPData(_toClient, _packet);
+
+            Debug.Log("Sent Spawn player...");
         }
     }
 

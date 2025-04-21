@@ -140,6 +140,7 @@ public class Client : MonoBehaviour
                 int _byteLength = stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
+                    Debug.Log($"byte lenght <= 0, disconnecting: {_byteLength}");
                     instance.Disconnect();
                     return;
                 }
@@ -284,14 +285,16 @@ public class Client : MonoBehaviour
 
                 if (_data.Length < 4)
                 {
+                    Debug.Log($"UDP data < 4, disconnecting: {_data.Length}");
                     instance.Disconnect();
                     return;
                 }
 
                 HandleData(_data);
             }
-            catch
+            catch (Exception _ex)
             {
+                Debug.Log($"Error in receive callBack UDP: {_ex}");
                 Disconnect();
             }
         }

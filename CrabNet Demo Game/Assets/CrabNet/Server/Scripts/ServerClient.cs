@@ -85,6 +85,7 @@ public class ServerClient
                 int _byteLength = stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
+                    Debug.Log($"byteLength <= 0, disconnecting: {_byteLength}");
                     Server.serverClients[id].Disconnect();
                     return;
                 }
@@ -222,6 +223,7 @@ public class ServerClient
     /// <param name="_playerName">The username of the new player.</param>
     public void SendIntoGame(string _playerName)
     {
+        Debug.Log("Sending new Client into game...");
         player = NetworkManager.instance.InstantiatePlayer();
         player.Initialize(id, _playerName);
 

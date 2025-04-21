@@ -49,9 +49,11 @@ public class UIManager : MonoBehaviour
     {
         // set menu to inactive, connect to server
         Client.instance.ip = ipField.text;
+        Client.instance.ConnectToServer();
+
+        // disable startMenu and InputField
         startMenu.SetActive(false);
         usernameField.interactable = false;
-        Client.instance.ConnectToServer();
     }
 
     public void HostServer()
@@ -64,13 +66,12 @@ public class UIManager : MonoBehaviour
         EnemyManager.instance.isHost = true;
         EnemyManager.instance.SpawnEnemies();
 
-        // disable startMenu and InputField
-        startMenu.SetActive(false);
-        usernameField.interactable = false;
-
         // connect to server (this client)
         Client.instance.ConnectToServer();
 
+        // disable startMenu and InputField
+        startMenu.SetActive(false);
+        usernameField.interactable = false;
     }
 
     public void LeaveServer()

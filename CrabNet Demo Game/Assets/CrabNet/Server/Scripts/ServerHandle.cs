@@ -16,30 +16,7 @@ public class ServerHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
 
-        if (Server.serverClients == null || !Server.serverClients.ContainsKey(_fromClient))
-        {
-            Debug.LogError($"Error: Invalid client ID {_fromClient} - Client dictionary not initialized or client not found");
-            return;
-        }
-
-        var client = Server.serverClients[_fromClient];
-        if (client == null)
-        {
-            Debug.LogError($"Error: Client {_fromClient} is null");
-            return;
-        }
-
-        if (client.tcp?.socket?.Client == null)
-        {
-            Debug.LogError($"Error: TCP connection not properly initialized for client {_fromClient}");
-            return;
-        }
-
-        Debug.Log($"{client.tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
-        if (_fromClient != _clientIdCheck)
-        {
-            Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
-        }
+        Debug.Log($"{Server.serverClients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
         Server.serverClients[_fromClient].SendIntoGame(_username);
     }
 

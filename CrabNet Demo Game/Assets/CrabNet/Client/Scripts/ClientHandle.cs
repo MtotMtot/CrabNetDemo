@@ -27,6 +27,7 @@ public class ClientHandle : MonoBehaviour
     /// <param name="_packet"></param>
     public static void SpawnPlayer(Packet _packet)
     {
+        Debug.Log("Received Spawn player!");
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
