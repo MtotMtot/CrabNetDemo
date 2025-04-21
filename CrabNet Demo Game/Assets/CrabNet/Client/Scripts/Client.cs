@@ -10,7 +10,7 @@ public class Client : MonoBehaviour
     public static Client instance;
     public static int dataBufferSize = 4096;
 
-    public string ip = "193.60.167.159";
+    private string ip = "127.0.0.1";
     public int port = 26950;
     public int myId = 0;
     public TCP tcp;
@@ -34,6 +34,11 @@ public class Client : MonoBehaviour
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
         }
+    }
+
+    public void SetIP(string _ip)
+    {
+        ip = _ip;
     }
 
     /// <summary>
