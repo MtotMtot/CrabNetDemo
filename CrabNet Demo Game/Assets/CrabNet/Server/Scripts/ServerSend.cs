@@ -133,7 +133,7 @@ public class ServerSend : MonoBehaviour
         }
     }
 
-    /// <summary>Send player disconncted to all clients to properly handle player disconnecting, prevents null referencing</summary>
+    /// <summary>Send player disconncted to all clients (but the one who disconnected) to properly handle player disconnecting, prevents null referencing</summary>
     /// <param name="_playerId">The player's ID.</param>
     public static void PlayerDisconnected(int _playerId)
     {
@@ -141,7 +141,7 @@ public class ServerSend : MonoBehaviour
         {
             _packet.Write(_playerId);
 
-            SendTCPDataToAll(_packet);
+            SendTCPDataToAll(_playerId, _packet);
         }
 
     }

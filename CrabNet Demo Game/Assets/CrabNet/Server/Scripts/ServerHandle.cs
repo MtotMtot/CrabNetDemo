@@ -17,6 +17,10 @@ public class ServerHandle
         string _username = _packet.ReadString();
 
         Debug.Log($"{Server.serverClients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
+        if (_fromClient != _clientIdCheck)
+        {
+            Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
+        }
         Server.serverClients[_fromClient].SendIntoGame(_username);
     }
 
