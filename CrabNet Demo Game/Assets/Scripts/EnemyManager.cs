@@ -92,7 +92,7 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public void SpawnEnemies()
     {
-        int i = 1;
+        int i = 0;
         foreach (GameObject spawnPoint in spawnPoints)
         {
             // spawn enemy at every spawn point and assign ID.
