@@ -47,17 +47,23 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ConnectToServer()   
     {
+        usernameField.interactable = false;
+        ipField.interactable = false;
+
         // set menu to inactive, connect to server
         Client.instance.ip = ipField.text;
         Client.instance.ConnectToServer();
 
         // disable startMenu and InputField
         startMenu.SetActive(false);
-        usernameField.interactable = false;
+        
     }
 
     public void HostServer()
     {
+        usernameField.interactable = false;
+        ipField.interactable = false;
+
         // start server, set isHost to true
         NetworkManager.instance.StartServer();
         NetworkManager.instance.isHost = true;
@@ -71,7 +77,6 @@ public class UIManager : MonoBehaviour
 
         // disable startMenu and InputField
         startMenu.SetActive(false);
-        usernameField.interactable = false;
     }
 
     public void LeaveServer()
