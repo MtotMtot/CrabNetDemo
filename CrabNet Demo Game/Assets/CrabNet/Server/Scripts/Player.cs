@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            if (enemy.layer == 9 || enemy.layer == 10 || enemy.layer == 11)
+            if (enemy.layer == 9 || enemy.layer == 10 || enemy.layer == 11 || enemy.layer == 0)
             {
                 ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
                 Debug.Log($"Sent spawn enemy {enemy.GetComponent<EnemyAI>().id}");
