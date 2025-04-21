@@ -4844,6 +4844,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7908017803848244740, guid: 37cb1dbe18d1a004ba0b5e77bbecbb77,
         type: 3}
+      propertyPath: ip
+      value: 193.60.167.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908017803848244740, guid: 37cb1dbe18d1a004ba0b5e77bbecbb77,
+        type: 3}
       propertyPath: port
       value: 26950
       objectReference: {fileID: 0}

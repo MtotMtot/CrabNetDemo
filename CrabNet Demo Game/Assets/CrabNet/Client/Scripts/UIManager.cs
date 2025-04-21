@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
         ipField.interactable = false;
 
         // set menu to inactive, connect to server
-        Client.instance.ip = ipField.text;
+        //Client.instance.ip = ipField.text;
         Client.instance.ConnectToServer();
 
         // disable startMenu and InputField

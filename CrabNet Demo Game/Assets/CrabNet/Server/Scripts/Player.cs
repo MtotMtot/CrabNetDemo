@@ -38,10 +38,16 @@ public class Player : MonoBehaviour
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
-            ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
-            Debug.Log($"Sent spawn enemy, id: {enemy.GetComponent<EnemyAI>().id}");
-
-            Debug.Log("iteration of enemy loop");
+            if (enemy.GetComponent<EnemyAI>().agent.name == "Enemy")
+            {
+                ServerSend.SpawnEnemy(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+                Debug.Log($"Sent spawn enemy {enemy.GetComponent<EnemyAI>().id}");
+            }
+            else if (enemy.GetComponent<EnemyAI>().agent.name == "Boss")
+            {
+                ServerSend.SpawnBoss(id, enemy.GetComponent<EnemyAI>().id, enemy.transform.position);
+                Debug.Log("Sent spawn boss");
+            }
         }
         Debug.Log("Sent all spawn enemies");
     }
