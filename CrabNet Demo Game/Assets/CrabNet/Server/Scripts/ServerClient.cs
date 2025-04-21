@@ -85,7 +85,6 @@ public class ServerClient
                 int _byteLength = stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
-                    Debug.Log($"byteLength <= 0, disconnecting: {_byteLength}");
                     Server.serverClients[id].Disconnect();
                     return;
                 }
