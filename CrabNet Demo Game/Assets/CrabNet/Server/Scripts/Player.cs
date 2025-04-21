@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         username = _username;
 
         Debug.Log("Starting: send spawn Enemies...");
+        ServerSend.SpawnEnemy(id, 0, EnemyManager.enemies[0].transform.position);
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
             // Send all enemies to new client
