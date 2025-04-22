@@ -62,7 +62,10 @@ public class UIManager : MonoBehaviour
 
         // disable startMenu and InputField
         startMenu.SetActive(false);
-        
+
+        // Create LogicManager for CLient here
+        NetworkManager.instance.InstantiateLogicManager();
+
     }
 
     public void HostServer()

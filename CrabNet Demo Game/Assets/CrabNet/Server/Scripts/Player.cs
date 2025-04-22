@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
         id = _id;
         username = _username;
 
-        Debug.Log("Starting: send spawn Enemies...");
         ServerSend.SpawnEnemy(id, 0, EnemyManager.enemies[0].transform.position);
         foreach (GameObject enemy in EnemyManager.enemies.Values)
         {
@@ -50,7 +49,6 @@ public class Player : MonoBehaviour
                 Debug.Log("Sent spawn boss");
             }
         }
-        Debug.Log("Sent all spawn enemies");
     }
 
     /// <summary>Processes player input and moves the player.</summary>

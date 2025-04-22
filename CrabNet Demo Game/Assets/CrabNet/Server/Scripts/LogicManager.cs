@@ -43,6 +43,7 @@ public class LogicManager : MonoBehaviour
     void Update()
     {
         // If the sector 1 is clear, send the state to the logic server.
+        // for host use only
         if (Sector1Clear)
         {
             ServerSend.Sector1State(Sector1Clear);

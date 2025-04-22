@@ -152,11 +152,13 @@ public class ClientHandle : MonoBehaviour
     public static void Sector1Clear(Packet _packet)
     {
         Debug.Log("received Sector 1 Clear from Server");
+        LogicManager.instance.OpenSector1Door();
     }
 
     public static void Sector2Clear(Packet _packet)
     {
         Debug.Log("received Sector 1 Clear from Server");
+        LogicManager.instance.OpenSector2Door();
     }
 
 
