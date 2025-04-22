@@ -103,6 +103,11 @@ public class EnemyManager : MonoBehaviour
         }
         SpawnBoss(enemies.Count + 1, GameObject.FindWithTag("BossSpawn").transform.position);
 
+        EnableLogicManagers();
+    }
+
+    public void EnableLogicManagers()
+    {
         // activate all logic managers.
         foreach (GameObject logicManager in LogicManagers)
         {

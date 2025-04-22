@@ -63,8 +63,9 @@ public class UIManager : MonoBehaviour
         // disable startMenu and InputField
         startMenu.SetActive(false);
 
-        // Create LogicManager for CLient here
+        // Create LogicManager and enable related objects for Client here
         NetworkManager.instance.InstantiateLogicManager();
+        EnemyManager.instance.EnableLogicManagers();
 
     }
 
