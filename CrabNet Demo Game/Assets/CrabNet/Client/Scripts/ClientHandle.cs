@@ -149,5 +149,15 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.instance.SpawnBoss(_enemyId, _spawnPos);
     }
 
+    public static void Sector1Clear(Packet _packet)
+    {
+        Debug.Log("received Sector 1 Clear from Server");
+    }
+
+    public static void Sector2Clear(Packet _packet)
+    {
+        Debug.Log("received Sector 1 Clear from Server");
+    }
+
 
 }
