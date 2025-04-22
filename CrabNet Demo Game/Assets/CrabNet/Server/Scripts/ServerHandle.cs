@@ -96,6 +96,7 @@ public class ServerHandle
         LogicManager.instance.Sector1Clear = false;
 
         Debug.Log("Opened sector 1 door");
+        ServerSend.RelaySector1Clear(_myId);
     }
 
     public static void Sector2Clear(Packet _packet)
@@ -106,6 +107,7 @@ public class ServerHandle
         LogicManager.instance.Sector2Clear = false;
 
         Debug.Log("Opened sector 2 door");
+        ServerSend.RelaySector2Clear(_myId);
     }
     #endregion
 }

@@ -19,6 +19,8 @@ public enum ServerPackets
     enemyRotation,
     spawnEnemy,
     spawnBoss,
+    relaySector1Clear,
+    relaySector2Clear,
 }
 
 /// <summary>Sent from client to server.</summary>

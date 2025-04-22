@@ -242,6 +242,22 @@ public class ServerSend : MonoBehaviour
         }
     }
 
+    public static void RelaySector1Clear(int _exceptClient)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.relaySector1Clear))
+        {
+            SendTCPDataToAll(_exceptClient, _packet);
+        }
+    }
+
+    public static void RelaySector2Clear(int _exceptClient)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.relaySector2Clear))
+        {
+            SendTCPDataToAll(_exceptClient, _packet);
+        }
+    }
+
     #endregion
 
     #region LogicServer Packets

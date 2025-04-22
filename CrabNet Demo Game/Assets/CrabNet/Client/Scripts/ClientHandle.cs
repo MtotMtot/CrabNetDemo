@@ -148,4 +148,6 @@ public class ClientHandle : MonoBehaviour
         Vector3 _spawnPos = _packet.ReadVector3();
         EnemyManager.instance.SpawnBoss(_enemyId, _spawnPos);
     }
+
+
 }

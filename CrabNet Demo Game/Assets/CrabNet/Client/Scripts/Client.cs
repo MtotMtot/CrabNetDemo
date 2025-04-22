@@ -360,6 +360,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.enemyRotation, ClientHandle.EnemyRotation },
             { (int)ServerPackets.spawnEnemy, ClientHandle.SpawnEnemy },
             { (int)ServerPackets.spawnBoss, ClientHandle.SpawnBoss },
+            { (int)ServerPackets.relaySector1Clear, ClientHandle.SpawnBoss },
+            { (int)ServerPackets.relaySector2Clear, ClientHandle.SpawnBoss },
         };
         Debug.Log("Initialized packets.");
     }
