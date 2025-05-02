@@ -36,6 +36,10 @@ public class Client : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// SetIp function called from UI Manager when an IP is entered, creates new TCP and UDP clients with this ip.
+    /// </summary>
+    /// <param name="_ip"></param>
     public void SetIP(string _ip)
     {
         ip = _ip;

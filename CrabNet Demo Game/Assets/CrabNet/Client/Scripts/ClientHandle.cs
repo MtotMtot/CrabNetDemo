@@ -141,6 +141,10 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.instance.SpawnEnemy(_enemyId, _spawnPos);
     }
 
+    /// <summary>
+    /// Spawn boss packet from server.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void SpawnBoss(Packet _packet)
     {
         Debug.Log("Received spawn Boss packet from Server");
@@ -149,12 +153,20 @@ public class ClientHandle : MonoBehaviour
         EnemyManager.instance.SpawnBoss(_enemyId, _spawnPos);
     }
 
+    /// <summary>
+    /// Sector 1 Clear from server: Opens Sector 1 door for this client.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void Sector1Clear(Packet _packet)
     {
         Debug.Log("received Sector 1 Clear from Server");
         LogicManager.instance.OpenSector1Door();
     }
 
+    /// <summary>
+    /// Sector 2 Clear from server: Opens Sector 2 door for this client.
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void Sector2Clear(Packet _packet)
     {
         Debug.Log("received Sector 1 Clear from Server");

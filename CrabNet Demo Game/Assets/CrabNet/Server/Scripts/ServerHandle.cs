@@ -99,6 +99,10 @@ public class ServerHandle
         ServerSend.RelaySector1Clear(_myId);
     }
 
+    /// <summary>
+    /// Receive sector 2 clear from LogicServer
+    /// </summary>
+    /// <param name="_packet"></param>
     public static void Sector2Clear(Packet _packet)
     {
         int _myId = _packet.ReadInt();

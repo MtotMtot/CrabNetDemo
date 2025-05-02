@@ -232,6 +232,12 @@ public class ServerSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Send spawn boss to target client.
+    /// </summary>
+    /// <param name="_playerId"></param>
+    /// <param name="_id"></param>
+    /// <param name="_spawnPos"></param>
     public static void SpawnBoss(int _playerId, int _id, Vector3 _spawnPos)
     {
         using (Packet _packet = new Packet((int)ServerPackets.spawnBoss))
@@ -242,6 +248,10 @@ public class ServerSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Relay Sector 1 clear (from logic server) to all other clients except host.
+    /// </summary>
+    /// <param name="_exceptClient"></param>
     public static void RelaySector1Clear(int _exceptClient)
     {
         using (Packet _packet = new Packet((int)ServerPackets.relaySector1Clear))
@@ -250,6 +260,10 @@ public class ServerSend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Relay Sector 2 clear (from logic server) to all other clients except host.
+    /// </summary>
+    /// <param name="_exceptClient"></param>
     public static void RelaySector2Clear(int _exceptClient)
     {
         using (Packet _packet = new Packet((int)ServerPackets.relaySector2Clear))

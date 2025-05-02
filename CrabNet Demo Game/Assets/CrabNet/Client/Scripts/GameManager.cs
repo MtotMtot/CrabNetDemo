@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
             _player = Instantiate(playerPrefab, _position, _rotation);
         }
 
+        // Adds player (id, username) to player dictionary.
         _player.GetComponent<PlayerManager>().id = _id;
         _player.GetComponent<PlayerManager>().username = _username;
         players.Add(_id, _player.GetComponent<PlayerManager>());

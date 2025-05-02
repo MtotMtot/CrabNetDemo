@@ -42,6 +42,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the ip entered into text field to the target IP for TCP and UDP clients.
+    /// </summary>
     public void SetIP()
     {
         Debug.Log(ipField.text.ToString());
@@ -69,6 +72,10 @@ public class UIManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Host Server button fucntion
+    /// disables UI, starts the server, spawns enemies and connect this client to the server.
+    /// </summary>
     public void HostServer()
     {
         usernameField.interactable = false;
@@ -89,6 +96,10 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Leaves the server, if host: stops the server.
+    /// Reloads scene to allow new connetions.
+    /// </summary>
     public void LeaveServer()
     {   
         // Properly Handle Disconnecting and Stopping Server.
@@ -107,7 +118,9 @@ public class UIManager : MonoBehaviour
         // Reload the current scene to reset.
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    /// <summary>
+    /// Closes pause menu
+    /// </summary>
     public void Resume()
     {
         // disable pauseMenu
@@ -115,6 +128,9 @@ public class UIManager : MonoBehaviour
         ChangedCursor();
     }
 
+    /// <summary>
+    /// Changes cursor when entering and exiting pause menu.
+    /// </summary>
     private void ChangedCursor()
     {
         if (pauseMenu.activeSelf)
