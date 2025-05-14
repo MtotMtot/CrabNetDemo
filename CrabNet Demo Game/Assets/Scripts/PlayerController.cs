@@ -99,11 +99,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && !isRunning && characterController.isGrounded)
         {
             rayCastShoot.Shoot();
-            ClientSend.PlayerShoot();
+            // Invoke sending player movement to server every (input)ms
+            Invoke("SendShoot", UIManager.instance.delay);
         }
 
-        // Send input to server
-        ClientSend.PlayerMovement();
+        // Invoke sending player movement to server every (input)ms
+        Invoke("SendMovement", UIManager.instance.delay);        
     }
 
     /// <summary>
@@ -112,5 +113,18 @@ public class PlayerController : MonoBehaviour
     private void Death()
     {
         Destroy(this.gameObject);
+    }
+    
+    /// <summary>
+    /// Send Movement to Server.
+    /// </summary>
+    private void SendMovement()
+    {
+        ClientSend.PlayerMovement();
+    }
+
+    private void SendShoot()
+    {
+        ClientSend.PlayerShoot();
     }
 }

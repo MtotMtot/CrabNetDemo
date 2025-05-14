@@ -78,8 +78,8 @@ public class EnemyAI : MonoBehaviour
         // Debug ray
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
 
-        ServerSend.EnemyPosition(Client.instance.myId, id, transform.position);
-        ServerSend.EnemyRotation(Client.instance.myId, id, transform.rotation);
+        // Send Enemy Movement to Server every (input)ms
+        Invoke("SendEnemyMovement", UIManager.instance.delay);
     }
 
     /// <summary>
@@ -220,5 +220,11 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    private void SendEnemyMovement()
+    {
+        ServerSend.EnemyPosition(Client.instance.myId, id, transform.position);
+        ServerSend.EnemyRotation(Client.instance.myId, id, transform.rotation);
     }
 }

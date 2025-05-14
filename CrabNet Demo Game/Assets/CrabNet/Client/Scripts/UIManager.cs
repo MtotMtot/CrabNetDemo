@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public InputField usernameField;
     public InputField ipField;
+    public InputField delayField;
+
+    // delay var for simulating lag.
+    public float delay = 0;
 
     /// <summary>
     /// Singleton this.
@@ -143,5 +147,18 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    /// <summary>
+    /// Sets delay from inputField (ms).
+    /// </summary>
+    public void SetDelay()
+    {
+        // temp var for getting float value from inputField.
+        float temp;
+        float.TryParse(delayField.text.ToString(), out temp);
+
+        // temp / 1000 since delay is in ms.
+        delay = temp/1000;
     }
 }
