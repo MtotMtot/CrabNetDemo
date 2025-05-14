@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 6187973454199771109}
   - component: {fileID: 2017744479279415727}
   - component: {fileID: 4968684295407991467}
+  - component: {fileID: 8611077419370214913}
   m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
@@ -466,6 +467,15 @@ MonoBehaviour:
   player: {fileID: 2945082963966816924}
   sensitivity: 100
   clampAngle: 85
+--- !u!45 &8611077419370214913
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8881324059770034769}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 2d056ac30ecc9e542b26e06133f23602, type: 2}
 --- !u!1001 &5759662655402803427
 PrefabInstance:
   m_ObjectHideFlags: 0
