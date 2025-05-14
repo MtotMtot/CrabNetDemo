@@ -48,11 +48,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Invoke death if player health <= 0
+        /*   // Invoke death if player health <= 0
         if (playerHealth.health <= 0)
         {
             Invoke(nameof(Death), 0.5f);
-        }
+        }   */
 
         bool isRunning = false;
 
